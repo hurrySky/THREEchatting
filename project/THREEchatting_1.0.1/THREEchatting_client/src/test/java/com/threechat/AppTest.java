@@ -1,4 +1,4 @@
-package com.three.chatting.THREEchatting_client;
+package com.threechat;
 
 import static org.junit.Assert.assertTrue;
 
