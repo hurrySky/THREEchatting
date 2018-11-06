@@ -16,7 +16,7 @@ public class ImagePanal extends JPanel{
 	/**
 	 * 无参构造方法
 	 */
-	public ImagePanal(){
+	private ImagePanal(){
 		
 	}
 	
