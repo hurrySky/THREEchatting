@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.Image;
 import java.awt.Point;
+import java.awt.Shape;
 import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -26,7 +27,7 @@ import com.threechat.view.common.ImagePanal;
 
 /**
  * 登录界面
- * @author lx
+ * @author lixin
  */
 public class LoginPage extends JFrame implements MouseMotionListener, MouseListener{
 
@@ -65,7 +66,6 @@ public class LoginPage extends JFrame implements MouseMotionListener, MouseListe
 	 * 退出按钮
 	 */
 	private JButton exitButton;
-	
 	/**
 	 *  下半部面板
 	 */
@@ -97,10 +97,12 @@ public class LoginPage extends JFrame implements MouseMotionListener, MouseListe
 		//设置JFrame禁用本地外观，使用下面自定义设置的外观；
         //this.setDefaultLookAndFeelDecorated(true);
 		this.setUndecorated(true);
+		// 定义圆角形状
+		final Shape shape = new RoundRectangle2D.Double(0d, 0d, this.getWidth(), this.getHeight(), 4, 4);
+		this.setShape(shape);
 		this.setVisible(true);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
-
 	/**
 	 * 初始化读取配置
 	 */
@@ -109,7 +111,7 @@ public class LoginPage extends JFrame implements MouseMotionListener, MouseListe
 		// 使用InPutStream流读取properties文件
 		BufferedReader bufferedReader = null;
 		try {
-			bufferedReader = new BufferedReader(new FileReader("resource/config/LoginPage.properties"));
+			bufferedReader = new BufferedReader(new FileReader("resource/config/viewPage.properties"));
 		} catch (FileNotFoundException e1) {
 			System.out.println("配置文件未找到!");
 			e1.printStackTrace();
@@ -121,10 +123,10 @@ public class LoginPage extends JFrame implements MouseMotionListener, MouseListe
 			e.printStackTrace();
 		}
 		// 获取key对应的value值
-		this.init_x = Integer.parseInt(properties.getProperty("init_x"));
-		this.int_y = Integer.parseInt(properties.getProperty("int_y"));
-		this.width = Integer.parseInt(properties.getProperty("width"));
-		this.height = Integer.parseInt(properties.getProperty("height"));
+		this.init_x = Integer.parseInt(properties.getProperty("login_init_x"));
+		this.int_y = Integer.parseInt(properties.getProperty("login_int_y"));
+		this.width = Integer.parseInt(properties.getProperty("login_width"));
+		this.height = Integer.parseInt(properties.getProperty("login_height"));
 	}
 	/**
 	 * 初始化 上半部 面板
@@ -143,7 +145,6 @@ public class LoginPage extends JFrame implements MouseMotionListener, MouseListe
 		exitButton.setBounds(this.width - 20,0,20,20);
 		topPanel.add(exitButton);
 	}
-
 	/**
 	 *  初始化 下半部 面板
 	 */
@@ -160,7 +161,7 @@ public class LoginPage extends JFrame implements MouseMotionListener, MouseListe
 		passwordText.setBackground(new Color(248, 248, 255));
 		passwordText.setBounds(120, 45, 210,30);
 		loginInButton = new JButton("登             录");
-		loginInButton.setBounds(120, 80, 210,30);
+		loginInButton.setBounds(120, 85, 210,30);
 		loginInButton.setBackground(new Color(135, 206, 250));
 		loginInButton.setBorder(null);
 		loginInButton.setFocusPainted(false); // 不绘制文字周围的边框
