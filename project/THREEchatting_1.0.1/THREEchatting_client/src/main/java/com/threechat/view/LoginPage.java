@@ -23,6 +23,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.MatteBorder;
 
+import com.threechat.view.common.ButtonUtil;
 import com.threechat.view.common.ImagePanal;
 
 /**
@@ -67,9 +68,15 @@ public class LoginPage extends JFrame implements MouseMotionListener, MouseListe
 	 */
 	private JButton exitButton;
 	/**
+	 * 小化按钮
+	 */
+	private JButton minButton;
+	/**
 	 *  下半部面板
 	 */
 	private JPanel underPanel;
+	private JTextField loginNameText, passwordText; // 定义账号框 ， 密码框
+	private JButton loginInButton; // 定义登录按钮
 	
 	public static void main(String[] args) {
 		LoginPage loginPage = new LoginPage();
@@ -132,16 +139,19 @@ public class LoginPage extends JFrame implements MouseMotionListener, MouseListe
 	 * 初始化 上半部 面板
 	 */
 	private void inittopPanel(){
-		exitButton = new JButton("X"); // 设置按钮文本为 X
-		exitButton.setForeground(Color.white); // 设置文字颜色为白色
-		exitButton.setFocusPainted(false); // 不绘制文字周围的边框
-		exitButton.setSize(20, 20); 
-		exitButton.setBorder(null);
-		exitButton.setBackground(Color.black);
+		// 获得退出按钮
+		exitButton = ButtonUtil.getExitButton(Color.black, Color.white);
 		exitButton.addMouseListener(this);
+		// 获得最小化按钮
+		minButton = ButtonUtil.getMinButton(Color.black, Color.white);
+		minButton.addMouseListener(this);
+		
 		topImage = Toolkit.getDefaultToolkit().getImage("resource/images/top.gif");
 		topPanel = new ImagePanal(topImage, width, height);
 		topPanel.setLayout(null);
+		
+		minButton.setBounds(this.width - 40,0,20,20);
+		topPanel.add(minButton);
 		exitButton.setBounds(this.width - 20,0,20,20);
 		topPanel.add(exitButton);
 	}
@@ -149,15 +159,12 @@ public class LoginPage extends JFrame implements MouseMotionListener, MouseListe
 	 *  初始化 下半部 面板
 	 */
 	private void initUnderPanel() {
-		JTextField loginNameText, passwordText; // 定义账号框 ， 密码框
-		JButton loginInButton; // 定义登录按钮
-		
 		loginNameText = new JTextField(25);
 		passwordText = new JTextField(25);
-		loginNameText.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
+		loginNameText.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK)); // 设置使只有下边框
 		loginNameText.setBackground(new Color(248, 248, 255));
 		loginNameText.setBounds(120, 10, 210,30);
-		passwordText.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
+		passwordText.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));  // 设置使只有下边框
 		passwordText.setBackground(new Color(248, 248, 255));
 		passwordText.setBounds(120, 45, 210,30);
 		loginInButton = new JButton("登             录");
@@ -190,6 +197,10 @@ public class LoginPage extends JFrame implements MouseMotionListener, MouseListe
 	public void mouseClicked(MouseEvent e) {
 		if (e.getSource() == exitButton) {
 			this.dispose();
+			System.exit(0);
+		}
+		if (e.getSource() == minButton) {
+			this.setExtendedState(JFrame.ICONIFIED);//最小化窗体
 		}
 	}
 
@@ -208,6 +219,10 @@ public class LoginPage extends JFrame implements MouseMotionListener, MouseListe
 	public void mouseEntered(MouseEvent e) {
 		if (e.getSource() == exitButton) {
 			exitButton.setBackground(Color.red);
+			exitButton.setForeground(Color.black); // 设置文字颜色为白色
+		}
+		if (e.getSource() == minButton) {
+			minButton.setForeground(new Color(135, 206, 250)); // 设置文字颜色为白色
 		}
 	}
 
@@ -215,6 +230,10 @@ public class LoginPage extends JFrame implements MouseMotionListener, MouseListe
 	public void mouseExited(MouseEvent e) {
 		if (e.getSource() == exitButton) {
 			exitButton.setBackground(Color.black);
+			exitButton.setForeground(Color.white); // 设置文字颜色为白色
+		}
+		if (e.getSource() == minButton) {
+			minButton.setForeground(Color.white); // 设置文字颜色为白色
 		}
 	}
 }
