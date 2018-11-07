@@ -167,11 +167,13 @@ public class LoginPage extends JFrame implements MouseMotionListener, MouseListe
 		passwordText.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));  // 设置使只有下边框
 		passwordText.setBackground(new Color(248, 248, 255));
 		passwordText.setBounds(120, 45, 210,30);
+		
 		loginInButton = new JButton("登             录");
 		loginInButton.setBounds(120, 85, 210,30);
 		loginInButton.setBackground(new Color(135, 206, 250));
 		loginInButton.setBorder(null);
 		loginInButton.setFocusPainted(false); // 不绘制文字周围的边框
+		
 		underPanel = new JPanel();
 		underPanel.setBackground(new Color(248, 248, 255));
 		underPanel.setLayout(null);
