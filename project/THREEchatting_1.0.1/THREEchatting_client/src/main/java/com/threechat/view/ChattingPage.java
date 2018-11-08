@@ -26,11 +26,13 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
+import javax.swing.UIManager;
 
 import com.threechat.base.ContactsItemData;
 import com.threechat.base.MyCellRenderer;
 import com.threechat.view.common.ButtonUtil;
 import com.threechat.view.common.ImageButton;
+import com.threechat.view.common.MyScrollBarUI;
 
 public class ChattingPage extends JFrame implements MouseMotionListener, MouseListener{
 	
@@ -106,7 +108,7 @@ public class ChattingPage extends JFrame implements MouseMotionListener, MouseLi
 	/**
 	 * 联系人or历史对话人列表组件
 	 */
-	private JList contactsList;
+	private JList<ContactsItemData> contactsList;
 	/**
 	 * 聊天窗口面板
 	 */
@@ -115,13 +117,17 @@ public class ChattingPage extends JFrame implements MouseMotionListener, MouseLi
 	public static void main(String[] args) {
 		ChattingPage chattingPage = new ChattingPage();
 	}
+	
+	/**
+	 * 构造方法
+	 */
 	public ChattingPage() {
 		init(); // 获得配置文件信息
 		initLeftMenuPanel(); // 初始化 左边菜单
 		initTopPanel(); // 初始化顶部面板
+		initContactsJscrollPanel(); //  联系人or历史对话人面板 滚动条
 		initContactsPanel(); // 初始化联系人or历史对话人面板
 		initChatingPanel(); // 初始化聊天窗口面板
-		initContactsJscrollPanel(); //  联系人or历史对话人面板 滚动条
 		
 		Container container = new Container();
 		container.setLayout(null);
@@ -129,7 +135,7 @@ public class ChattingPage extends JFrame implements MouseMotionListener, MouseLi
 		container.add(topPanel);
 		container.add(contactsPanel);
 		container.add(chatingPanel);
-		container.add(contactsJscrollPanel);
+	//	container.add(contactsJscrollPanel);
 		
 		this.add(container);
 		this.addMouseMotionListener(this);
@@ -214,7 +220,8 @@ public class ChattingPage extends JFrame implements MouseMotionListener, MouseLi
 		minButton.addMouseListener(this);
 		
 		topPanel = new JPanel();
-		topPanel.setBackground(new Color(245, 245, 245));
+	//	topPanel.setBackground(new Color(245, 245, 245));
+	//	topPanel.setBackground(new Color(198, 47, 47));
 		topPanel.setLayout(null);
 		topPanel.setBounds(60,0,chatting_width - 60, 60);
 		topPanel.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, new Color(219, 217, 216)));
@@ -245,6 +252,7 @@ public class ChattingPage extends JFrame implements MouseMotionListener, MouseLi
 		contactsPanel.setBackground(new Color(237, 234, 232));
 		contactsPanel.setBorder(BorderFactory.createMatteBorder(1, 0, 1, 0, new Color(219, 217, 216)));
 		contactsPanel.setBounds(60, 60, 250, chatting_height - 60);
+		contactsPanel.add(contactsJscrollPanel);
 	}
 	
 	/**
@@ -253,7 +261,7 @@ public class ChattingPage extends JFrame implements MouseMotionListener, MouseLi
 	private void initChatingPanel() {
 		chatingPanel = new JPanel();
 		chatingPanel.setLayout(null);
-		chatingPanel.setBackground(Color.PINK);
+		
 		chatingPanel.setBorder(BorderFactory.createMatteBorder(1, 0, 1, 1, new Color(219, 217, 216)));
 		chatingPanel.setBounds(310, 60, chatting_width - 310, chatting_height - 60);
 	}
@@ -264,27 +272,41 @@ public class ChattingPage extends JFrame implements MouseMotionListener, MouseLi
 		Icon icon1 = new ImageIcon("resource/images/default_head.jpg");
 		Icon icon2 = new ImageIcon("resource/images/default_head.jpg");
 		Icon icon3 = new ImageIcon("resource/images/default_head.jpg");
-		Icon[] icons = { icon1, icon2, icon3};
+		Icon icon4 = new ImageIcon("resource/images/default_head.jpg");
+		Icon icon5 = new ImageIcon("resource/images/default_head.jpg");
+		Icon[] icons = { icon1, icon2, icon3, icon4, icon5};
 		
 		Vector<ContactsItemData> items = new Vector<ContactsItemData>();
 		ContactsItemData contactsItemData = new ContactsItemData("李新", icon1);
 		ContactsItemData contactsItemData2 = new ContactsItemData("azhegn", icon2);
 		ContactsItemData contactsItemData3 = new ContactsItemData("lixin", icon3);
+		ContactsItemData contactsItemData4 = new ContactsItemData("lixin", icon4);
+		ContactsItemData contactsItemData5 = new ContactsItemData("lixin", icon5);
 		items.add(contactsItemData);
 		items.add(contactsItemData2);
 		items.add(contactsItemData3);
+		items.add(contactsItemData4);
+		items.add(contactsItemData5);
 		
-		contactsList = new JList();
+		contactsList = new JList<ContactsItemData>();
 		contactsList.setBounds(0, 0, 250, chatting_height-60);
-		contactsList.setCellRenderer(new MyCellRenderer());
+		contactsList.setSelectionBackground(new Color(237, 234, 232));
+		contactsList.setSelectionForeground(Color.WHITE);
+		contactsList.setForeground(Color.DARK_GRAY);
 		contactsList.setListData(items);
-		
+		contactsList.setCellRenderer(new MyCellRenderer());
+		contactsList.setBackground(new Color(192,192,192));
 		contactsList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);// 设置单一选择模式（每次只能  有一个元素被选中）
 		
 		contactsJscrollPanel = new JScrollPane(contactsList);
-		//contactsJscrollPanel.setLayout(null);
-		contactsJscrollPanel.setBounds(60, 60, chatting_width - 310, chatting_height - 60);
-		contactsJscrollPanel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		contactsJscrollPanel.setBorder(null);
+		contactsJscrollPanel.setBounds(0, 0, 250, chatting_height - 60);
+		
+		contactsJscrollPanel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+		contactsJscrollPanel.getVerticalScrollBar().setSize(10, 10);
+		contactsJscrollPanel.getVerticalScrollBar().setUI(new MyScrollBarUI());
+		
+
 	}
 	
 	@Override
@@ -294,7 +316,6 @@ public class ChattingPage extends JFrame implements MouseMotionListener, MouseLi
 	}
 	@Override
 	public void mouseMoved(MouseEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 	@Override
