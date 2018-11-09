@@ -3,7 +3,6 @@ package com.threechat.view;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Cursor;
-import java.awt.HeadlessException;
 import java.awt.Point;
 import java.awt.Shape;
 import java.awt.event.MouseEvent;
@@ -25,8 +24,8 @@ import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTextPane;
 import javax.swing.ListSelectionModel;
-import javax.swing.UIManager;
 
 import com.threechat.base.ContactsItemData;
 import com.threechat.base.MyCellRenderer;
@@ -113,8 +112,36 @@ public class ChattingPage extends JFrame implements MouseMotionListener, MouseLi
 	 * 聊天窗口面板
 	 */
 	private JPanel chatingPanel;
+	/**
+	 * 聊天信息框
+	 */
+	private JTextPane chatInfoPanel;
+	private JScrollPane chatInfoJscrollPanel;
+	/**
+	 * 聊天工具面板
+	 */
+	private JPanel toolPanel;
+	/**
+	 * 表情按钮
+	 */
+	private JButton smileButton;
+	/**
+	 * 聊天信息输入框
+	 */
+	private JTextPane chatInsertPanel;
+	private JScrollPane chatInsertJscrollPanel;
+	/**
+	 * 消息发送面板
+	 */
+	private JPanel sendPanel;
+	
+	/**
+	 *  消息发送按钮
+	 */
+	private JButton sendButton;
 	
 	public static void main(String[] args) {
+		@SuppressWarnings("unused")
 		ChattingPage chattingPage = new ChattingPage();
 	}
 	
@@ -135,7 +162,6 @@ public class ChattingPage extends JFrame implements MouseMotionListener, MouseLi
 		container.add(topPanel);
 		container.add(contactsPanel);
 		container.add(chatingPanel);
-	//	container.add(contactsJscrollPanel);
 		
 		this.add(container);
 		this.addMouseMotionListener(this);
@@ -185,6 +211,7 @@ public class ChattingPage extends JFrame implements MouseMotionListener, MouseLi
 		headButton.setBackground(new Color(40, 41, 43));
 		
 		chatButton = new ImageButton("resource/images/chat_active.jpg", 50, 50);
+		//chatButton = (ImageButton) ButtonUtil.getImageButton("resource/images/chat_active.jpg", 50, 50);
 		chatButton.setBounds(5, 100, 50, 50);
 		chatButton.setBackground(new Color(40, 41, 43));
 		chatButton.addMouseListener(this);
@@ -211,17 +238,15 @@ public class ChattingPage extends JFrame implements MouseMotionListener, MouseLi
 	private void initTopPanel() {
 		initTopPanel_leftPanel(); // 上部面板，左边区域
 		// 获得退出按钮
-		exitButton = ButtonUtil.getExitButton(new Color(245, 245, 245), Color.BLACK);
+		exitButton = ButtonUtil.getExitButton(null, Color.BLACK);
 		exitButton.setBounds(chatting_width - 80, 0, 20, 20);
 		exitButton.addMouseListener(this);
 		// 获得最小化按钮
-		minButton = ButtonUtil.getMinButton(new Color(245, 245, 245), Color.BLACK);
+		minButton = ButtonUtil.getMinButton(null, Color.BLACK);
 		minButton.setBounds(chatting_width - 100, 0, 20, 20);
 		minButton.addMouseListener(this);
 		
 		topPanel = new JPanel();
-	//	topPanel.setBackground(new Color(245, 245, 245));
-	//	topPanel.setBackground(new Color(198, 47, 47));
 		topPanel.setLayout(null);
 		topPanel.setBounds(60,0,chatting_width - 60, 60);
 		topPanel.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, new Color(219, 217, 216)));
@@ -256,32 +281,22 @@ public class ChattingPage extends JFrame implements MouseMotionListener, MouseLi
 	}
 	
 	/**
-	 * 初始化聊天窗口面板
-	 */
-	private void initChatingPanel() {
-		chatingPanel = new JPanel();
-		chatingPanel.setLayout(null);
-		
-		chatingPanel.setBorder(BorderFactory.createMatteBorder(1, 0, 1, 1, new Color(219, 217, 216)));
-		chatingPanel.setBounds(310, 60, chatting_width - 310, chatting_height - 60);
-	}
-	/**
-	 * 初始化联系人or历史对话人面板 滚动条
+	 * 初始化联系人or历史对话人面板 滚动条面板
 	 */
 	private void initContactsJscrollPanel(){
 		Icon icon1 = new ImageIcon("resource/images/default_head.jpg");
-		Icon icon2 = new ImageIcon("resource/images/default_head.jpg");
-		Icon icon3 = new ImageIcon("resource/images/default_head.jpg");
-		Icon icon4 = new ImageIcon("resource/images/default_head.jpg");
-		Icon icon5 = new ImageIcon("resource/images/default_head.jpg");
-		Icon[] icons = { icon1, icon2, icon3, icon4, icon5};
+		Icon icon2 = new ImageIcon("resource/images/default_head2.jpg");
+		Icon icon3 = new ImageIcon("resource/images/default_head3.jpg");
+		Icon icon4 = new ImageIcon("resource/images/default_head2.jpg");
+		Icon icon5 = new ImageIcon("resource/images/default_head3.jpg");
+		//Icon[] icons = { icon1, icon2, icon3, icon4, icon5};
 		
 		Vector<ContactsItemData> items = new Vector<ContactsItemData>();
-		ContactsItemData contactsItemData = new ContactsItemData("李新", icon1);
-		ContactsItemData contactsItemData2 = new ContactsItemData("azhegn", icon2);
-		ContactsItemData contactsItemData3 = new ContactsItemData("lixin", icon3);
-		ContactsItemData contactsItemData4 = new ContactsItemData("lixin", icon4);
-		ContactsItemData contactsItemData5 = new ContactsItemData("lixin", icon5);
+		ContactsItemData contactsItemData = new ContactsItemData("李新", icon1, "我能吃");
+		ContactsItemData contactsItemData2 = new ContactsItemData("azhegn", icon2, "我能做");
+		ContactsItemData contactsItemData3 = new ContactsItemData("lixin", icon3, "我能睡");
+		ContactsItemData contactsItemData4 = new ContactsItemData("lixin", icon4, "我是候选人");
+		ContactsItemData contactsItemData5 = new ContactsItemData("lixin", icon5, "我们不一样");
 		items.add(contactsItemData);
 		items.add(contactsItemData2);
 		items.add(contactsItemData3);
@@ -290,23 +305,83 @@ public class ChattingPage extends JFrame implements MouseMotionListener, MouseLi
 		
 		contactsList = new JList<ContactsItemData>();
 		contactsList.setBounds(0, 0, 250, chatting_height-60);
-		contactsList.setSelectionBackground(new Color(237, 234, 232));
-		contactsList.setSelectionForeground(Color.WHITE);
+		contactsList.setSelectionBackground(new Color(192, 192, 192));
+		contactsList.setSelectionForeground(Color.BLACK);
 		contactsList.setForeground(Color.DARK_GRAY);
 		contactsList.setListData(items);
 		contactsList.setCellRenderer(new MyCellRenderer());
-		contactsList.setBackground(new Color(192,192,192));
+		contactsList.setOpaque(true);
+		contactsList.setBackground(new Color(237, 234, 232));
 		contactsList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);// 设置单一选择模式（每次只能  有一个元素被选中）
+		contactsList.setAlignmentX((float) 0.5);
+		contactsList.setAlignmentY((float) 0.5);
+		contactsList.setFixedCellHeight(55);
 		
 		contactsJscrollPanel = new JScrollPane(contactsList);
 		contactsJscrollPanel.setBorder(null);
 		contactsJscrollPanel.setBounds(0, 0, 250, chatting_height - 60);
-		
 		contactsJscrollPanel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 		contactsJscrollPanel.getVerticalScrollBar().setSize(10, 10);
 		contactsJscrollPanel.getVerticalScrollBar().setUI(new MyScrollBarUI());
+	}
+	
+	/**
+	 * 初始化聊天窗口面板
+	 */
+	private void initChatingPanel() {
 		
-
+		chatInfoPanel = new JTextPane(); // 创建聊天信息面板对象
+		chatInfoPanel.setSize(550, 330);
+		chatInfoPanel.setBorder(null);
+		chatInfoPanel.setBackground(new Color(245, 245, 245));
+		chatInfoJscrollPanel = new JScrollPane(chatInfoPanel); // 创建聊天信息滚动条面板
+		chatInfoJscrollPanel.setBounds(0, 0, 550, 330);
+		chatInfoJscrollPanel.setBorder(null);
+		chatInfoJscrollPanel.setVerticalScrollBarPolicy( JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		chatInfoJscrollPanel.getVerticalScrollBar().setUI(new MyScrollBarUI());
+		
+		chatInsertPanel = new JTextPane(); // 创建聊天输入面板对象
+		chatInsertPanel.setSize(550, 130);
+		chatInsertPanel.setBorder(null);
+		chatInsertPanel.setBackground(Color.WHITE);
+		
+		chatInsertJscrollPanel = new JScrollPane(chatInsertPanel); // 创建聊天输入信息滚动条面板
+		chatInsertJscrollPanel.setBounds(0, 370, 550, 130);
+		chatInsertJscrollPanel.setBorder(null);
+		chatInsertJscrollPanel.setVerticalScrollBarPolicy( JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		chatInsertJscrollPanel.getVerticalScrollBar().setUI(new MyScrollBarUI());
+		
+		smileButton = ButtonUtil.getImageButton("resource/images/smile.jpg", 20, 20);
+		smileButton.setBorder(null);
+		smileButton.setBounds(30, 10, 20, 20);
+		
+		toolPanel = new JPanel(); // 
+		toolPanel.setLayout(null);
+		toolPanel.setBackground(new Color(245, 245, 245));
+		toolPanel.setBounds(0, 330, 550, 40);
+		toolPanel.setBorder(BorderFactory.createMatteBorder(1, 0, 1, 0, new Color(219, 217, 216)));
+		toolPanel.add(smileButton);
+				
+		sendPanel = new JPanel(); // 
+		sendPanel.setLayout(null);
+		sendPanel.setBackground(Color.WHITE);
+		sendPanel.setBounds(0, 500, 550, 40);
+		sendPanel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(219, 217, 216)));
+		
+		sendButton = ButtonUtil.getCustomButton("发       送", 70, 30, new Color(50, 205, 50), Color.BLACK);
+		sendButton.setBorder(null);
+		sendButton.setBounds(450, 0, 70, 30);
+		sendPanel.add(sendButton);
+		
+		chatingPanel = new JPanel();
+		chatingPanel.setLayout(null);
+		chatingPanel.add(chatInfoJscrollPanel);
+		chatingPanel.add(chatInsertJscrollPanel);
+		chatingPanel.add(toolPanel);
+		chatingPanel.add(sendPanel);
+		chatingPanel.setBorder(BorderFactory.createMatteBorder(1, 0, 1, 1, new Color(219, 217, 216)));
+		chatingPanel.setBounds(310, 60, chatting_width - 310, chatting_height - 60);
+		
 	}
 	
 	@Override
@@ -337,18 +412,16 @@ public class ChattingPage extends JFrame implements MouseMotionListener, MouseLi
 			System.exit(0);
 		}
 		if (e.getSource() == minButton) {
-			this.setExtendedState(JFrame.ICONIFIED);//最小化窗体
+			this.setExtendedState(JFrame.ICONIFIED); //最小化窗体
 		}
 	}
 	@Override
 	public void mousePressed(MouseEvent e) {
 		p.x= e.getX();
 		p.y = e.getY();
-		
 	}
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 	@Override

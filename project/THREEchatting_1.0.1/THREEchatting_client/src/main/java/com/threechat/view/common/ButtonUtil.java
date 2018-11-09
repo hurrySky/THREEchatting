@@ -33,29 +33,71 @@ public class ButtonUtil extends JButton{
 	}
 	/**
 	 * 获得退出按钮
-	 * @return
+	 * @param backgroundColor 背景颜色
+	 * @param fontColor 字体颜色
+	 * @return JButton
 	 */
 	public static JButton getExitButton(Color backgroundColor, Color fontColor){
 		button = new JButton("X"); // 设置按钮文本为 X
-		button.setForeground(fontColor); // 设置文字颜色为白色
+		button.setForeground(fontColor); // 设置文字颜色
+		if (fontColor != null) {
+			button.setForeground(fontColor); // 设置文字颜色
+		}else {
+			button.setForeground(Color.BLACK); // 设置文字颜色
+		}
 		button.setFocusPainted(false); // 不绘制文字周围的边框
 		button.setSize(20, 20);
 		button.setBorder(null);
-		button.setBackground(backgroundColor);
+		if (backgroundColor != null) {
+			button.setBackground(backgroundColor);
+		}else {
+			button.setBackground(new Color(245,245,245));
+		}
 		return button;
 	}
 	
 	/**
 	 * 获得最小化按钮
-	 * @return
+	 * @param backgroundColor 背景颜色
+	 * @param fontColor 字体颜色
+	 * @return JButton
 	 */
 	public static JButton getMinButton(Color backgroundColor, Color fontColor){
 		button = new JButton("一"); // 设置按钮文本为 X
-		button.setForeground(fontColor); // 设置文字颜色为白色
+		if (fontColor != null) {
+			button.setForeground(fontColor); // 设置文字颜色
+		}else {
+			button.setForeground(Color.BLACK); // 设置文字颜色
+		}
 		button.setFocusPainted(false); // 不绘制文字周围的边框
 		button.setSize(20, 20);
 		button.setBorder(null);
-		button.setBackground(backgroundColor);
+		if (backgroundColor != null) {
+			button.setBackground(backgroundColor);
+		}else {
+			button.setBackground(new Color(245,245,245));
+		}
+		return button;
+	}
+	/**
+	 * 获得自定义大小，指定背景颜色的按钮
+	 * @param buttonText 按钮文字
+	 * @param button_width 按钮宽度
+	 * @param button_height 按钮高度
+	 * @param backgroundColor 背景颜色
+	 * @param fontColor 字体颜色
+	 * @return JButton
+	 */
+	public static JButton getCustomButton(String buttonText, int button_width, int button_height, Color backgroundColor,Color fontColor) {
+		button = new JButton();
+		if (buttonText != null) {
+			button.setText(buttonText);
+		}
+		if (backgroundColor != null ) {
+			button.setBackground(backgroundColor);
+		}
+		button.setSize(button_width, button_height);
+		button.setFocusPainted(false); // 不绘制文字周围的边框
 		return button;
 	}
 }

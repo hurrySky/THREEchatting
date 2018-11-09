@@ -15,14 +15,11 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
-
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.border.MatteBorder;
-
 import com.threechat.view.common.ButtonUtil;
 import com.threechat.view.common.ImagePanal;
 
@@ -79,6 +76,7 @@ public class LoginPage extends JFrame implements MouseMotionListener, MouseListe
 	private JButton loginInButton; // 定义登录按钮
 	
 	public static void main(String[] args) {
+		@SuppressWarnings("unused")
 		LoginPage loginPage = new LoginPage();
 	}
 	
