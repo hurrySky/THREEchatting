@@ -315,7 +315,7 @@ public class ChattingPage extends JFrame implements MouseMotionListener, MouseLi
 		contactsList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);// 设置单一选择模式（每次只能  有一个元素被选中）
 		contactsList.setAlignmentX((float) 0.5);
 		contactsList.setAlignmentY((float) 0.5);
-		contactsList.setFixedCellHeight(55);
+		contactsList.setFixedCellHeight(60);
 		
 		contactsJscrollPanel = new JScrollPane(contactsList);
 		contactsJscrollPanel.setBorder(null);
@@ -323,6 +323,7 @@ public class ChattingPage extends JFrame implements MouseMotionListener, MouseLi
 		contactsJscrollPanel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 		contactsJscrollPanel.getVerticalScrollBar().setSize(10, 10);
 		contactsJscrollPanel.getVerticalScrollBar().setUI(new MyScrollBarUI());
+		contactsJscrollPanel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(219, 217, 216)));
 	}
 	
 	/**
@@ -371,6 +372,8 @@ public class ChattingPage extends JFrame implements MouseMotionListener, MouseLi
 		sendButton = ButtonUtil.getCustomButton("发       送", 70, 30, new Color(50, 205, 50), Color.BLACK);
 		sendButton.setBorder(null);
 		sendButton.setBounds(450, 0, 70, 30);
+		sendButton.addMouseMotionListener(this);
+		sendButton.addMouseListener(this);
 		sendPanel.add(sendButton);
 		
 		chatingPanel = new JPanel();
@@ -433,6 +436,9 @@ public class ChattingPage extends JFrame implements MouseMotionListener, MouseLi
 		if (e.getSource() == minButton) {
 			minButton.setForeground(new Color(135, 206, 250)); // 设置文字颜色为该色
 		}
+		if (e.getSource() == sendButton) {
+			sendButton.setForeground(Color.WHITE);
+		}
 	}
 	@Override
 	public void mouseExited(MouseEvent e) {
@@ -442,6 +448,9 @@ public class ChattingPage extends JFrame implements MouseMotionListener, MouseLi
 		}
 		if (e.getSource() == minButton) {
 			minButton.setForeground(Color.black); // 设置文字颜色为白色
+		}
+		if (e.getSource() == sendButton) {
+			sendButton.setForeground(Color.BLACK);
 		}
 	}
 }
