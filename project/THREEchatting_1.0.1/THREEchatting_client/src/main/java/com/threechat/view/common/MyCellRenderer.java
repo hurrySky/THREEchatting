@@ -1,4 +1,4 @@
-package com.threechat.base;
+package com.threechat.view.common;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -18,6 +18,8 @@ import javax.swing.border.Border;
 import javax.swing.plaf.ButtonUI;
 import javax.swing.plaf.ComboBoxUI;
 import javax.swing.plaf.ComponentUI;
+
+import com.threechat.base.ContactsItemData;
 
 public class MyCellRenderer extends JButton implements ListCellRenderer<Object> {
 

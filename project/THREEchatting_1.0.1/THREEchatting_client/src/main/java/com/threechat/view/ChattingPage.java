@@ -28,9 +28,9 @@ import javax.swing.JTextPane;
 import javax.swing.ListSelectionModel;
 
 import com.threechat.base.ContactsItemData;
-import com.threechat.base.MyCellRenderer;
 import com.threechat.view.common.ButtonUtil;
 import com.threechat.view.common.ImageButton;
+import com.threechat.view.common.MyCellRenderer;
 import com.threechat.view.common.MyScrollBarUI;
 
 public class ChattingPage extends JFrame implements MouseMotionListener, MouseListener{

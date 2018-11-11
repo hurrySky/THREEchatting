@@ -6,8 +6,16 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
+/**
+ * 按钮工具类
+ * @author lixin
+ */
 public class ButtonUtil extends JButton{
-	
+
+	private static final long serialVersionUID = 1L;
+	/**
+	 * 私有Jbutton 属性
+	 */
 	private static JButton button;
 	
 	/**
