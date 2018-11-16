@@ -64,7 +64,7 @@ public class MySocketServer implements Runnable{
 	    System.out.println("服务线程启动中...");
 		// 监听指定的端口
 		try {
-			serverSocket = new ServerSocket(port);
+			serverSocket = new ServerSocket(port); // 监听指定的端口
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
@@ -81,13 +81,9 @@ public class MySocketServer implements Runnable{
 	    	Runnable runnable = new Runnable() {
 				@Override
 				public void run() {
+					
 					try {
-						//Thread.sleep(1000);
-						wait(1000);
-					} catch (InterruptedException e1) {
-						e1.printStackTrace();
-					}
-					try {
+						
 						Socket socket =  serverSocket.accept();
 						InputStream inputStream = socket.getInputStream();
 						StringBuilder stringBuilder = getStrInfoByInputStream(inputStream);
