@@ -13,7 +13,7 @@ public class MySocketServer implements Runnable{
 	/**
 	 * 定义绑定到特定端口的服务器套接字
 	 */
-	private static ServerSocket serverSocket;
+	private static ServerSocket serverSocket = null;
 
 	/**
 	 * 配置文件
@@ -60,55 +60,79 @@ public class MySocketServer implements Runnable{
 
 	@Override
 	public void run() {
-//		// 监听指定的端口
-//		serverSocket = new ServerSocket(port);
-//		// server将一直等待连接的到来
-//	    System.out.println("server就绪，持续等待客户端连接");
-//	    // 循环监听端口
-//	    while (true) {
-//	    	Socket socket = serverSocket.accept();
-//	    }
+
 	    System.out.println("服务线程启动中...");
-	    try {
+		// 监听指定的端口
+		try {
 			serverSocket = new ServerSocket(port);
-		} catch (IOException e) {
-			e.printStackTrace();
+		} catch (IOException e1) {
+			e1.printStackTrace();
 		}
+	
 	    System.out.println("server就绪，持续等待客户端连接...");
+	 // 循环监听端口
 	    while(true){
 	    	try {
-				Socket socket = serverSocket.accept();
-			} catch (IOException e) {
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-	    	
-		    Runnable runnable = new Runnable() {
-		    	
+	    	System.out.println(".............");
+	    	Runnable runnable = new Runnable() {
 				@Override
 				public void run() {
+					try {
+						//Thread.sleep(1000);
+						wait(1000);
+					} catch (InterruptedException e1) {
+						e1.printStackTrace();
+					}
+					try {
+						Socket socket =  serverSocket.accept();
+						InputStream inputStream = socket.getInputStream();
+						StringBuilder stringBuilder = getStrInfoByInputStream(inputStream);
+				        System.out.println(stringBuilder);
+				        inputStream.close();
+				        socket.close();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}finally{
+						System.out.println();
+					}
 				}
 		    };
 		    threadPool.submit(runnable);
 	    }
-	    
-//		try {
-//			
-//			InputStream inputStream = socket.getInputStream();
-//			byte[] bytes = new byte[1024];
-//	          int len = 0;
-//	          StringBuilder stringBuilder = new StringBuilder();
-//	          while ((len = inputStream.read(bytes)) != -1) {
-//	            // 注意指定编码格式，发送方和接收方一定要统一，建议使用UTF-8
-//	        	  stringBuilder.append(new String(bytes, 0, len, "UTF-8"));
-//	          }
-//	          System.out.println("get message from client: " + stringBuilder);
-//	          Thread.sleep(1000);
-//	          inputStream.close();
-//	         // socket.close();
-//	          
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
+	    // serverSocket.close();
 	}
 
+	private StringBuilder getStrInfoByInputStream(InputStream inputStream) {
+		StringBuilder stringBuilder = new StringBuilder();
+		try {
+			byte[] bytes = new byte[1024];
+	        int len = 0;
+	       
+	        while ((len = inputStream.read(bytes)) != -1) {
+	        	// 注意指定编码格式，发送方和接收方一定要统一，建议使用UTF-8
+	        	stringBuilder.append(new String(bytes, 0, len, "UTF-8"));
+	        }
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return stringBuilder;
+	}
+	
+	/**
+	 * 关闭资源
+	 * @param inputStream 
+	 * @param socket
+	 */
+	private void closeAll(InputStream inputStream, Socket socket) {
+		try {
+			inputStream.close();
+			socket.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }
