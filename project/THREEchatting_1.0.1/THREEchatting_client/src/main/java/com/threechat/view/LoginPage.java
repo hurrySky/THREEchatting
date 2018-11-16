@@ -116,7 +116,7 @@ public class LoginPage extends JFrame implements MouseMotionListener, MouseListe
 		// 使用InPutStream流读取properties文件
 		BufferedReader bufferedReader = null;
 		try {
-			bufferedReader = new BufferedReader(new FileReader("resource/config/viewPage.properties"));
+			bufferedReader = new BufferedReader(new FileReader("resource/config/pageConfig.properties"));
 		} catch (FileNotFoundException e1) {
 			System.out.println("配置文件未找到!");
 			e1.printStackTrace();

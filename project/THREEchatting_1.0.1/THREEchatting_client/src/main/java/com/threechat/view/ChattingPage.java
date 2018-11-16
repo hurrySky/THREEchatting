@@ -116,6 +116,9 @@ public class ChattingPage extends JFrame implements MouseMotionListener, MouseLi
 	 * 聊天信息框
 	 */
 	private JTextPane chatInfoPanel;
+	/**
+	 * 聊天信息滚动面板
+	 */
 	private JScrollPane chatInfoJscrollPanel;
 	/**
 	 * 聊天工具面板
@@ -129,6 +132,9 @@ public class ChattingPage extends JFrame implements MouseMotionListener, MouseLi
 	 * 聊天信息输入框
 	 */
 	private JTextPane chatInsertPanel;
+	/**
+	 * 聊天信息输入滚动面板
+	 */
 	private JScrollPane chatInsertJscrollPanel;
 	/**
 	 * 消息发送面板
@@ -184,7 +190,7 @@ public class ChattingPage extends JFrame implements MouseMotionListener, MouseLi
 		// 使用InPutStream流读取properties文件
 		BufferedReader bufferedReader = null;
 		try {
-			bufferedReader = new BufferedReader(new FileReader("resource/config/viewPage.properties"));
+			bufferedReader = new BufferedReader(new FileReader("resource/config/pageConfig.properties"));
 		} catch (FileNotFoundException e1) {
 			System.out.println("配置文件未找到!");
 			e1.printStackTrace();
@@ -334,10 +340,12 @@ public class ChattingPage extends JFrame implements MouseMotionListener, MouseLi
 		chatInfoPanel = new JTextPane(); // 创建聊天信息面板对象
 		chatInfoPanel.setSize(550, 330);
 		chatInfoPanel.setBorder(null);
+		chatInfoPanel.setEditable(false);
 		chatInfoPanel.setBackground(new Color(245, 245, 245));
 		chatInfoJscrollPanel = new JScrollPane(chatInfoPanel); // 创建聊天信息滚动条面板
 		chatInfoJscrollPanel.setBounds(0, 0, 550, 330);
 		chatInfoJscrollPanel.setBorder(null);
+		chatInfoJscrollPanel.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		chatInfoJscrollPanel.setVerticalScrollBarPolicy( JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		chatInfoJscrollPanel.getVerticalScrollBar().setUI(new MyScrollBarUI());
 		
@@ -349,6 +357,7 @@ public class ChattingPage extends JFrame implements MouseMotionListener, MouseLi
 		chatInsertJscrollPanel = new JScrollPane(chatInsertPanel); // 创建聊天输入信息滚动条面板
 		chatInsertJscrollPanel.setBounds(0, 370, 550, 130);
 		chatInsertJscrollPanel.setBorder(null);
+		chatInsertJscrollPanel.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		chatInsertJscrollPanel.setVerticalScrollBarPolicy( JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		chatInsertJscrollPanel.getVerticalScrollBar().setUI(new MyScrollBarUI());
 		
@@ -416,6 +425,16 @@ public class ChattingPage extends JFrame implements MouseMotionListener, MouseLi
 		}
 		if (e.getSource() == minButton) {
 			this.setExtendedState(JFrame.ICONIFIED); //最小化窗体
+		}
+		if (e.getSource() == sendButton) {
+			System.out.println(chatInsertPanel.getText());
+			String insertStr = chatInsertPanel.getText();
+			String kong = "";
+			for (int i = 0; i < 100 - insertStr.length(); i++) {
+				kong = "	" + kong;
+			}
+			kong = kong + insertStr;
+			chatInfoPanel.setText(kong);
 		}
 	}
 	@Override
