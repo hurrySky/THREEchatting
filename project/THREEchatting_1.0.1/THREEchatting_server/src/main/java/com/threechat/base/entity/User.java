@@ -39,8 +39,48 @@ public class User {
     private String motto;
     /** 所在地 */
     private String address;
+    /** 创建者 */
+    private String createBy;
+    /** 创建时间 */
+    private String createTime;
+    /** 更新者 */
+    private String updateBy;
+    /** 更新时间 */
+    private String updateTime;
+    /** 备注 */
+    private String remark;
 	public Integer getUserId() {
 		return userId;
+	}
+	public String getCreateBy() {
+		return createBy;
+	}
+	public void setCreateBy(String createBy) {
+		this.createBy = createBy;
+	}
+	public String getCreateTime() {
+		return createTime;
+	}
+	public void setCreateTime(String createTime) {
+		this.createTime = createTime;
+	}
+	public String getUpdateBy() {
+		return updateBy;
+	}
+	public void setUpdateBy(String updateBy) {
+		this.updateBy = updateBy;
+	}
+	public String getUpdateTime() {
+		return updateTime;
+	}
+	public void setUpdateTime(String updateTime) {
+		this.updateTime = updateTime;
+	}
+	public String getRemark() {
+		return remark;
+	}
+	public void setRemark(String remark) {
+		this.remark = remark;
 	}
 	public void setUserId(Integer userId) {
 		this.userId = userId;

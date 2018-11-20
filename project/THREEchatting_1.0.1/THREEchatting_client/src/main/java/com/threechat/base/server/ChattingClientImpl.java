@@ -1,9 +1,14 @@
 package com.threechat.base.server;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.ObjectOutputStream;
 import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ChattingClientImpl implements ChattingClient{
 	public static void main(String args[]) throws UnknownHostException, IOException{
@@ -14,9 +19,51 @@ public class ChattingClientImpl implements ChattingClient{
 	    Socket socket = new Socket(host, port);
 	    // 建立连接后获得输出流
 	    OutputStream outputStream = socket.getOutputStream();
-	    String message="你好好从上面的代码可以得知，ThreadPoolExecutor继承了AbstractExecutorService类，并提供了四个构造器，事实上，通过观察每个构造器的源码具体实现，发现前面三个构造器都是调用的第四个构造器进行的初始化工作。下面解释下一下构造上面的代码可以得知，ThreadPoolExecutor继承了AbstractExecutorService类，并提供了四个构造器，事实上，通过观察每个构造器的源码具体实现，发现前面三个构造器都是调用的第四个构造器进行的初始化工作。下面解释下一下构造上面的代码可以得知，ThreadPoolExecutor继承了AbstractExecutorService类，并提供了四个构造器，事实上，通过观察每个构造器的源码具体实现，发现前面三个构造器都是调用的第四个构造器进行的初始化工作。下面解释下一下构造上面的代码可以得知，ThreadPoolExecutor继承了AbstractExecutorService类，并提供了四个构造器，事实上，通过观察每个构造器的源码具体实现，发现前面三个构造器都是调用的第四个构造器进行的初始化工作。下面解释下一下构造上面的代码可以得知，ThreadPoolExecutor继承了AbstractExecutorService类，并提供了四个构造器，事实上，通过观察每个构造器的源码具体实现，发现前面三个构造器都是调用的第四个构造器进行的初始化工作。下面解释下一下构造上面的代码可以得知，ThreadPoolExecutor继承了AbstractExecutorService类，并提供了四个构造器，事实上，通过观察每个构造器的源码具体实现，发现前面三个构造器都是调用的第四个构造器进行的初始化工作。下面解释下一下构造上面的代码可以得知，ThreadPoolExecutor继承了AbstractExecutorService类，并提供了四个构造器，事实上，通过观察每个构造器的源码具体实现，发现前面三个构造器都是调用的第四个构造器进行的初始化工作。下面解释下一下构造上面的代码可以得知，ThreadPoolExecutor继承了AbstractExecutorService类，并提供了四个构造器，事实上，通过观察每个构造器的源码具体实现，发现前面三个构造器都是调用的第四个构造器进行的初始化工作。下面解释下一下构造上面的代码可以得知，ThreadPoolExecutor继承了AbstractExecutorService类，并提供了四个构造器，事实上，通过观察每个构造器的源码具体实现，发现前面三个构造器都是调用的第四个构造器进行的初始化工作。下面解释下一下构造上面的代码可以得知，ThreadPoolExecutor继承了AbstractExecutorService类，并提供了四个构造器，事实上，通过观察每个构造器的源码具体实现，发现前面三个构造器都是调用的第四个构造器进行的初始化工作。下面解释下一下构造上面的代码可以得知，ThreadPoolExecutor继承了AbstractExecutorService类，并提供了四个构造器，事实上，通过观察每个构造器的源码具体实现，发现前面三个构造器都是调用的第四个构造器进行的初始化工作。下面解释下一下构造上面的代码可以得知，ThreadPoolExecutor继承了AbstractExecutorService类，并提供了四个构造器，事实上，通过观察每个构造器的源码具体实现，发现前面三个构造器都是调用的第四个构造器进行的初始化工作。下面解释下一下构造上面的代码可以得知，ThreadPoolExecutor继承了AbstractExecutorService类，并提供了四个构造器，事实上，通过观察每个构造器的源码具体实现，发现前面三个构造器都是调用的第四个构造器进行的初始化工作。下面解释下一下构造上面的代码可以得知，ThreadPoolExecutor继承了AbstractExecutorService类，并提供了四个构造器，事实上，通过观察每个构造器的源码具体实现，发现前面三个构造器都是调用的第四个构造器进行的初始化工作。下面解释下一下构造上面的代码可以得知，ThreadPoolExecutor继承了AbstractExecutorService类，并提供了四个构造器，事实上，通过观察每个构造器的源码具体实现，发现前面三个构造器都是调用的第四个构造器进行的初始化工作。下面解释下一下构造上面的代码可以得知，ThreadPoolExecutor继承了AbstractExecutorService类，并提供了四个构造器，事实上，通过观察每个构造器的源码具体实现，发现前面三个构造器都是调用的第四个构造器进行的初始化工作。下面解释下一下构造上面的代码可以得知，ThreadPoolExecutor继承了AbstractExecutorService类，并提供了四个构造器，事实上，通过观察每个构造器的源码具体实现，发现前面三个构造器都是调用的第四个构造器进行的初始化工作。下面解释下一下构造器中各个参数的含义：corePoolSize：核心池的大小，这个参数跟后面讲述的线程池的实现原理有非常大的关系。在创建了线程池后，默认情况下，线程池中并没有任何线程，而是等待有任务到来才创建线程去执行任务，除非调用了prestartAllCoreThreads()或者prestartCoreThread()方法，从这2个方法的名字就可以看出，是预创建线程的意思，即在没有任务到来之前就创建corePoolSize个线程或者一个线程。默认情况下，在创建了线程池后，线程池中的线程数为0，当有任务来之后，就会创建一个线程去执行任务，当线程池中的线程数目达到corePoolSize后，就会把到达的任务放到缓存队列当中；maximumPoolSize：线程池最大线程数，这个参数也是一个非常重要的参数，它表示在线程池中最多能创建多少个线程；keepAliveTime：表示线程没有任务执行时最多保持多久时间会终止。默认情况下，只有当线程池中的线程数大于corePoolSize时，keepAliveTime才会起作用，直到线程池中的线程数不大于corePoolSize，即当线程池中的线程数大于corePoolSize时，如果一个线程空闲的时间达到keepAliveTime，则会终止，直到线程池中的线程数不超过corePoolSize。但是如果调用了allowCoreThreadTimeOut(boolean)方法，在线程池中的线程数不大于corePoolSize时，keepAliveTime参数也会起作用，直到线程池中的线程数为；unit：参数keepAliveTime的时间单位，有7种取值，在TimeUnit类中有7种静态属性：好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好  yiwangzhibujianyiwangzhibujianyiwangzhibujianyiwangzhibujianyiwangzhibujianyiwangzhibujianyiwangzhibujianyiwangzhibujianyiwangzhibujianyiwangzhibujianyiwangzhibujianyiwangzhibujianyiwangzhibujianyiwangzhibujianyiwangzhibujianyiwangzhibujianyiwangzhibujianyiwangzhibujianyiwangzhibujianyiwangzhibujianyiwangzhibujianvPPPP";
-	    socket.getOutputStream().write(message.getBytes("UTF-8"));
+	    String message="你好好从上面的代码可以得知PPPP";
+	    int length = message.length();
+	    sendMessageMap(message, length, socket);
+	    //sendMessage(String.valueOf(len), socket);
+	    //socket.shutdownOutput();
+	    //sendMessage(message, socket);
+	    InputStream inputStream = socket.getInputStream();
+		StringBuilder stringBuilder = getStrInfoByInputStream(inputStream);
+	    System.out.println(stringBuilder);
 	    outputStream.close();
 	    socket.close();
+	}
+	
+	/**
+	 * 发送消息
+	 * @param message
+	 * @param socket
+	 * @throws UnsupportedEncodingException
+	 * @throws IOException
+	 */
+	public static void sendMessage(String message, Socket socket) throws UnsupportedEncodingException, IOException {
+		socket.getOutputStream().write(message.getBytes("UTF-8"));
+	}
+	
+	public static void sendMessageMap(String message,int length, Socket socket) throws UnsupportedEncodingException, IOException {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("length", length);
+		map.put("message", message);
+		ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
+		objectOutputStream.writeObject(map);
+	}
+	
+	private static StringBuilder getStrInfoByInputStream(InputStream inputStream) {
+		StringBuilder stringBuilder = new StringBuilder();
+		try {
+			byte[] bytes = new byte[1024];
+	        int len = 0;
+	        
+	        while ((len = inputStream.read(bytes)) != -1) {
+	        	// 注意指定编码格式，发送方和接收方一定要统一，建议使用UTF-8
+	        	stringBuilder.append(new String(bytes, 0, len, "UTF-8"));
+	        }
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return stringBuilder;
 	}
 }

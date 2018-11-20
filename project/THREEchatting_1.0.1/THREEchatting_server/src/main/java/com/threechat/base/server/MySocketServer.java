@@ -2,8 +2,13 @@ package com.threechat.base.server;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.ObjectInputStream;
+import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -11,7 +16,7 @@ import com.threechat.base.config.BaseConfig;
 
 public class MySocketServer implements Runnable{
 	/**
-	 * 定义绑定到特定端口的服务器套接字
+	 * 绑定到特定端口的服务器套接字
 	 */
 	private static ServerSocket serverSocket = null;
 
@@ -70,14 +75,14 @@ public class MySocketServer implements Runnable{
 		}
 	
 	    System.out.println("server就绪，持续等待客户端连接...");
-	 // 循环监听端口
+	    // 循环监听端口
 	    while(true){
 	    	try {
 				Thread.sleep(500);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-	    	System.out.println(".............");
+	    	//System.out.println(".............");
 	    	Runnable runnable = new Runnable() {
 				@Override
 				public void run() {
@@ -86,9 +91,21 @@ public class MySocketServer implements Runnable{
 						
 						Socket socket =  serverSocket.accept();
 						InputStream inputStream = socket.getInputStream();
-						StringBuilder stringBuilder = getStrInfoByInputStream(inputStream);
-				        System.out.println(stringBuilder);
+						ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);
+						HashMap<String, Object> map = (HashMap<String, Object>)objectInputStream.readObject();
+						System.out.println("lentgh" + map.get("length"));
+						System.out.println("message" + map.get("message"));
+						//StringBuilder stringBuilder = getStrInfoByInputStream(inputStream);
+				        //System.out.println(stringBuilder);
+						
+				        OutputStream outputStream = socket.getOutputStream();
+					    String message="我是服务端：我收到了。";
+					    outputStream.write(message.getBytes());
+					    outputStream.flush();
+					    //sendMessage(message, socket);
+					    //outputStream.close();
 				        inputStream.close();
+				        outputStream.close();
 				        socket.close();
 					} catch (Exception e) {
 						e.printStackTrace();
@@ -130,5 +147,17 @@ public class MySocketServer implements Runnable{
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	/**
+	 * 发送消息
+	 * @param message
+	 * @param socket
+	 * @throws UnsupportedEncodingException
+	 * @throws IOException
+	 */
+	public static void sendMessage(String message, Socket socket) throws UnsupportedEncodingException, IOException {
+		OutputStream out = socket.getOutputStream();
+		out.write(message.getBytes("UTF-8"));
+		out.flush();//清空缓存区的内容
 	}
 }
