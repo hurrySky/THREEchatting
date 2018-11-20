@@ -10,6 +10,8 @@ import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.threechat.base.tools.SocketUtil;
+
 public class ChattingClientImpl implements ChattingClient{
 	public static void main(String args[]) throws UnknownHostException, IOException{
 		 // 要连接的服务端IP地址和端口
@@ -22,6 +24,7 @@ public class ChattingClientImpl implements ChattingClient{
 	    String message="你好好从上面的代码可以得知PPPP";
 	    int length = message.length();
 	    sendMessageMap(message, length, socket);
+	    System.out.println("vvvvv" + SocketUtil.isServerClose(socket));
 	    //sendMessage(String.valueOf(len), socket);
 	    //socket.shutdownOutput();
 	    //sendMessage(message, socket);
@@ -36,13 +39,31 @@ public class ChattingClientImpl implements ChattingClient{
 	 * 发送消息
 	 * @param message
 	 * @param socket
+	 */
+	public static Boolean sendMessage(String message, Socket socket) {
+		Boolean flag = false;
+		try {
+			socket.getOutputStream().write(message.getBytes("UTF-8"));
+			flag = true;
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+			return flag;
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+			return flag;
+		}
+		return flag;
+	}
+	
+	/**
+	 * 发送map对象消息
+	 * @param message
+	 * @param length
+	 * @param socket
 	 * @throws UnsupportedEncodingException
 	 * @throws IOException
 	 */
-	public static void sendMessage(String message, Socket socket) throws UnsupportedEncodingException, IOException {
-		socket.getOutputStream().write(message.getBytes("UTF-8"));
-	}
-	
 	public static void sendMessageMap(String message,int length, Socket socket) throws UnsupportedEncodingException, IOException {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("length", length);

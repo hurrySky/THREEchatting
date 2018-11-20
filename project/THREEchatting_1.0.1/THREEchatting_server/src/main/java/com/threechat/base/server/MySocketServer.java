@@ -13,6 +13,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import com.threechat.base.config.BaseConfig;
+import com.threechat.base.tools.SocketUtil;
 
 public class MySocketServer implements Runnable{
 	/**
@@ -97,11 +98,11 @@ public class MySocketServer implements Runnable{
 						System.out.println("message" + map.get("message"));
 						//StringBuilder stringBuilder = getStrInfoByInputStream(inputStream);
 				        //System.out.println(stringBuilder);
-						
+						System.out.println("vvvvv" + SocketUtil.isServerClose(socket));
 				        OutputStream outputStream = socket.getOutputStream();
 					    String message="我是服务端：我收到了。";
 					    outputStream.write(message.getBytes());
-					    outputStream.flush();
+					    //outputStream.flush();
 					    //sendMessage(message, socket);
 					    //outputStream.close();
 				        inputStream.close();
@@ -148,6 +149,7 @@ public class MySocketServer implements Runnable{
 			e.printStackTrace();
 		}
 	}
+	
 	/**
 	 * 发送消息
 	 * @param message
