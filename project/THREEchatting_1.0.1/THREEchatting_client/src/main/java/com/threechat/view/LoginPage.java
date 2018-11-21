@@ -202,6 +202,9 @@ public class LoginPage extends JFrame implements MouseMotionListener, MouseListe
 		if (e.getSource() == minButton) {
 			this.setExtendedState(JFrame.ICONIFIED);//最小化窗体
 		}
+		if (e.getSource() == loginInButton) {
+			System.out.println("login...");
+		}
 	}
 
 	@Override
