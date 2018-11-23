@@ -1,4 +1,4 @@
-package com.threechat.base.server;
+package com.threechat.base.client;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -10,12 +10,12 @@ import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.threechat.base.tools.SocketUtil;
+import com.threechat.base.common.tools.SocketUtil;
 
 public class ChattingClientImpl implements ChattingClient{
 	public static void main(String args[]) throws UnknownHostException, IOException{
 		 // 要连接的服务端IP地址和端口
-	    String host = "127.0.0.1"; 
+	    String host = "127.0.0.1";
 	    int port = 30704;
 	    // 与服务端建立连接
 	    Socket socket = new Socket(host, port);

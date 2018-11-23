@@ -1,11 +1,13 @@
 package com.threechat.base.entity;
 
+import java.io.Serializable;
+
 /**
  * 用户表
  * @author lixin
  *
  */
-public class User {
+public class User implements Serializable{
 
 	/** 用户ID */
     private Integer userId;

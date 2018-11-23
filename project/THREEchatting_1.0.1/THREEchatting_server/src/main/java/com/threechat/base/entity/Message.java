@@ -9,13 +9,18 @@ public class Message implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	/**
-	 *  消息
-	 */
-	private String Message;
-	/**
 	 *  消息ID
 	 */
 	private String MessageId;
+	/**
+	 * 消息
+	 */
+	private String Message;
+	/**
+	 * 登录名/账号
+	 * @return
+	 */
+	private String loginName;
 	
 	public String getMessage() {
 		return Message;
@@ -28,5 +33,11 @@ public class Message implements Serializable{
 	}
 	public void setMessageId(String messageId) {
 		MessageId = messageId;
+	}
+	public String getLoginName() {
+		return loginName;
+	}
+	public void setLoginName(String loginName) {
+		this.loginName = loginName;
 	}
 }

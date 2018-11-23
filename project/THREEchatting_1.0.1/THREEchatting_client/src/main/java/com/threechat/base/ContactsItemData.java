@@ -8,7 +8,6 @@ import javax.swing.Icon;
  */
 public class ContactsItemData {
 	
-	
 	/**
 	 * 联系人名称
 	 */

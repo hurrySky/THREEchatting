@@ -1,4 +1,4 @@
-package com.threechat.base.server;
+package com.threechat.base.client;
 
 public interface ChattingClient {
 

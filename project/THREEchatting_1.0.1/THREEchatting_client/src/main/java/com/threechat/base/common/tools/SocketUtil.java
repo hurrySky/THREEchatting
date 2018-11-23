@@ -1,10 +1,15 @@
-package com.threechat.base.tools;
+package com.threechat.base.common.tools;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.ObjectOutputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.Socket;
+import java.util.HashMap;
+
+import com.threechat.base.common.operationenum.OperationEnum;
 
 /**
  * socket 收发消息时用到的工具类
@@ -42,7 +47,7 @@ public class SocketUtil {
 	   } 
 	}
 	/**
-	* 判断是否断开连接;断开返回true,没有返回false
+	* 判断是否断开连接，断开返回true,没有返回false
 	* @param socket
 	* @return
 	*/ 
@@ -54,4 +59,21 @@ public class SocketUtil {
 	    return true; 
 	   } 
 	} 
+	
+	/**
+	 * 发送map对象消息
+	 * @param message
+	 * @param length
+	 * @param socket
+	 * @throws UnsupportedEncodingException
+	 * @throws IOException
+	 */
+	public static void SendRequestMap(OperationEnum enum_, HashMap<String, Object> param, Socket socket) throws UnsupportedEncodingException, IOException {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("operation", enum_);
+		map.put("param", param);
+		ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
+		objectOutputStream.writeObject(map);
+		objectOutputStream.close();
+	}
 }
