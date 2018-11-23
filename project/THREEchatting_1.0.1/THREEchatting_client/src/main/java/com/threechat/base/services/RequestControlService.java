@@ -21,8 +21,8 @@ public class RequestControlService {
 	 */
 	private static ObjectInputStream objectInputStream;
 	
-	private RequestControlService() {
-	}
+//	public RequestControlService() {
+//	}
 	
 	/**
 	 * 向服务器发送请求
@@ -33,7 +33,7 @@ public class RequestControlService {
 	 * @throws UnknownHostException 
 	 * @throws ClassNotFoundException 
 	 */
-	public static HashMap<String, Object> SendRequest(OperationEnum enum_, HashMap<String, Object> param) throws UnknownHostException, IOException, ClassNotFoundException {
+	public static HashMap<String, Object> SendRequest(String enum_, HashMap<String, Object> param) throws UnknownHostException, IOException, ClassNotFoundException {
 		 // 要连接的服务端IP地址和端口
 	    String host = "127.0.0.1";
 	    int port = 30705;

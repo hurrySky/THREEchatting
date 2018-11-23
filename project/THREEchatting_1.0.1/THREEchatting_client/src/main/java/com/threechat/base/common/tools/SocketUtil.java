@@ -68,7 +68,7 @@ public class SocketUtil {
 	 * @throws UnsupportedEncodingException
 	 * @throws IOException
 	 */
-	public static void SendRequestMap(OperationEnum enum_, HashMap<String, Object> param, Socket socket) throws UnsupportedEncodingException, IOException {
+	public static void SendRequestMap(String enum_, HashMap<String, Object> param, Socket socket) throws UnsupportedEncodingException, IOException {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("operation", enum_);
 		map.put("param", param);

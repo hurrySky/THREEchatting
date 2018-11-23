@@ -15,11 +15,14 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
+
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import com.threechat.base.controller.LoginController;
 import com.threechat.view.common.ButtonUtil;
 import com.threechat.view.common.ImagePanal;
 
@@ -162,15 +165,21 @@ public class LoginPage extends JFrame implements MouseMotionListener, MouseListe
 		loginNameText.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK)); // 设置使只有下边框
 		loginNameText.setBackground(new Color(248, 248, 255));
 		loginNameText.setBounds(120, 10, 210,30);
+		loginNameText.addMouseListener(this);
+		loginNameText.addMouseMotionListener(this);
+		
 		passwordText.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));  // 设置使只有下边框
 		passwordText.setBackground(new Color(248, 248, 255));
 		passwordText.setBounds(120, 45, 210,30);
+		passwordText.addMouseListener(this);
+		passwordText.addMouseMotionListener(this);
 		
 		loginInButton = new JButton("登             录");
 		loginInButton.setBounds(120, 85, 210,30);
 		loginInButton.setBackground(new Color(135, 206, 250));
 		loginInButton.setBorder(null);
 		loginInButton.setFocusPainted(false); // 不绘制文字周围的边框
+		loginInButton.addMouseListener(this);
 		
 		underPanel = new JPanel();
 		underPanel.setBackground(new Color(248, 248, 255));
@@ -202,8 +211,24 @@ public class LoginPage extends JFrame implements MouseMotionListener, MouseListe
 		if (e.getSource() == minButton) {
 			this.setExtendedState(JFrame.ICONIFIED);//最小化窗体
 		}
+		if (e.getSource() == loginNameText) {
+			loginNameText.setForeground(Color.black);
+		}
 		if (e.getSource() == loginInButton) {
-			System.out.println("login...");
+			String userName = loginNameText.getText();
+			String pasword =  passwordText.getText();
+			String userNameReg = "^[A-Za-z0-9]{3,20}+$";
+			String passwordReg = "^[A-Za-z0-9]{3,20}+$";
+			if(!userName.matches(userNameReg)) {
+				LoginController.login(userName, pasword);
+				System.out.println("用户名错误!");
+				loginNameText.setForeground(Color.red);
+			} else if(!pasword.matches(passwordReg)) {
+				System.out.println("密码错误!");
+			} else {
+				LoginController.login(userName, pasword); // 登录
+				System.out.println("login...");
+			}
 		}
 	}
 

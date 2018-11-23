@@ -6,6 +6,7 @@ import java.io.ObjectInputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.HashMap;
+
 import com.threechat.base.config.BaseConfig;
 
 public class ReponseControlService implements Runnable{
@@ -82,7 +83,9 @@ public class ReponseControlService implements Runnable{
 	 * 处理请求，返回响应
 	 */
 	public void doRequestMap(HashMap<String, Object> map) {
+		System.out.println(map.get("operation"));
 		String enum_ = map.get("operation").toString();
+		@SuppressWarnings("unchecked")
 		HashMap<String, Object> param =  (HashMap<String, Object>) map.get("param");
 		if ("login".equals(enum_) && enum_ != null) {
 			
