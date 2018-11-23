@@ -74,6 +74,6 @@ public class SocketUtil {
 		map.put("param", param);
 		ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
 		objectOutputStream.writeObject(map);
-		objectOutputStream.close();
+		// objectOutputStream.close(); 对象输出流关闭则socket也会关闭
 	}
 }

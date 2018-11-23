@@ -66,6 +66,11 @@ public class ReponseControlService implements Runnable{
 	    // 循环监听端口
 	    while(true){
 	    	try {
+				Thread.sleep(500);
+			} catch (InterruptedException e1) {
+				e1.printStackTrace();
+			}
+	    	try {
 				Socket socket =  serverSocket.accept();
 				InputStream inputStream = socket.getInputStream();
 				ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);
@@ -75,7 +80,6 @@ public class ReponseControlService implements Runnable{
 			} catch (IOException | ClassNotFoundException e) {
 				e.printStackTrace();
 			}
-		
 	    }
 	}
 	
@@ -88,6 +92,8 @@ public class ReponseControlService implements Runnable{
 		@SuppressWarnings("unchecked")
 		HashMap<String, Object> param =  (HashMap<String, Object>) map.get("param");
 		if ("login".equals(enum_) && enum_ != null) {
+			String userName = (String) param.get("userName");
+			String password = (String) param.get("password");
 			
 		}else if (true) {
 			

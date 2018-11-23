@@ -228,6 +228,7 @@ public class LoginPage extends JFrame implements MouseMotionListener, MouseListe
 			} else {
 				LoginController.login(userName, pasword); // 登录
 				System.out.println("login...");
+				LoginController.toChattingPage();
 			}
 		}
 	}

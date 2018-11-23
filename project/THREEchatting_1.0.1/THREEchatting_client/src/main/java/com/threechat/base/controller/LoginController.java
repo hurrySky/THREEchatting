@@ -6,6 +6,7 @@ import java.util.HashMap;
 
 import com.threechat.base.common.operationenum.OperationEnum;
 import com.threechat.base.services.RequestControlService;
+import com.threechat.view.ChattingPage;
 
 public class LoginController {
 	/**
@@ -35,6 +36,12 @@ public class LoginController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+	}
+	
+	/**
+	 * 跳转到chating 界面
+	 */
+	public static void toChattingPage() {
+		ChattingPage chattingPage = new ChattingPage();
 	}
 }
