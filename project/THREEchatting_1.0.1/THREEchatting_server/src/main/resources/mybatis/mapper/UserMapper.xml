@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.threechat.base.mapper.UserMapper">
+	<!-- sys_user表字段映射 -->
+	<resultMap type="User" id="UserResult">
+		<id     property="userId"       column="user_id"      />
+		<result property="code"    		column="code"   	  />
+		<result property="loginName"    column="login_name"   />
+		<result property="userName"     column="user_name"    />
+		<result property="nickname"     column="nick_name"    />
+		<result property="email"        column="email"        />
+		<result property="phonenumber"  column="phonenumber"  />
+		<result property="sex"  		column="sex"		  />
+		<result property="headImgUrl"   column="head_img_url" />
+		<result property="password"     column="password"     />
+		<result property="salt"         column="salt"         />
+		<result property="status"       column="status"       />
+		<result property="loginIp"      column="login_ip"     />
+		<result property="loginDate"    column="login_date"   />
+		<result property="motto"    	column="motto"   	  />
+		<result property="address"    	column="address"      />
+		<result property="motto"    	column="motto"   />
+		<result property="createBy"     column="create_by"    />
+		<result property="createTime"   column="create_time"  />
+		<result property="updateBy"     column="update_by"    />
+		<result property="updateTime"   column="update_time"  />
+		<result property="remark"       column="remark"  	  />
+	</resultMap>
+	<!-- 根据loginName查找用户 -->
+	<select id="findUser" parameterType="String" resultMap="UserResult">
+		select  
+			u.user_id,
+			u.code,
+			u.login_name,
+			u.user_name,
+			u.nickname,
+			u.email,
+			u.phonenumber,
+			u.sex,
+			u.head_img_url,
+			u.password,
+			u.salt,
+			u.status,
+			u.login_ip,
+			u.login_date,
+			u.motto,
+			u.address,
+			u.create_by,
+			u.create_time,
+			u.update_by,
+			u.update_time,
+			u.remark
+		from 
+			sys_user u
+		where
+			u.login_name = #{loginName}
+	</select>	
+</mapper>

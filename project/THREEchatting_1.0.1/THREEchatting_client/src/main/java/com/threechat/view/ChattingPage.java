@@ -191,7 +191,7 @@ public class ChattingPage extends JFrame implements MouseMotionListener, MouseLi
 		// 使用InPutStream流读取properties文件
 		BufferedReader bufferedReader = null;
 		try {
-			bufferedReader = new BufferedReader(new FileReader("resource/config/pageConfig.properties"));
+			bufferedReader = new BufferedReader(new FileReader("resources/config/pageConfig.properties"));
 		} catch (FileNotFoundException e1) {
 			System.out.println("配置文件未找到!");
 			e1.printStackTrace();
@@ -217,14 +217,14 @@ public class ChattingPage extends JFrame implements MouseMotionListener, MouseLi
 		headButton.setBounds(5, 10, 50, 50);
 		headButton.setBackground(new Color(40, 41, 43));
 		
-		chatButton = new ImageButton("resource/images/chat_active.jpg", 50, 50);
+		chatButton = new ImageButton("resources/images/chat_active.jpg", 50, 50);
 		//chatButton = (ImageButton) ButtonUtil.getImageButton("resource/images/chat_active.jpg", 50, 50);
 		chatButton.setBounds(5, 100, 50, 50);
 		chatButton.setBackground(new Color(40, 41, 43));
 		chatButton.addMouseListener(this);
 		chatButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR)); // 鼠标进入button指针变手指
 		
-		contactsButton = new ImageButton("resource/images/contacts.jpg", 50, 50);
+		contactsButton = new ImageButton("resources/images/contacts.jpg", 50, 50);
 		contactsButton.setBounds(5, 165, 50, 50);
 		contactsButton.setBackground(new Color(40, 41, 43));
 		contactsButton.addMouseListener(this);
@@ -291,11 +291,11 @@ public class ChattingPage extends JFrame implements MouseMotionListener, MouseLi
 	 * 初始化联系人or历史对话人面板 滚动条面板
 	 */
 	private void initContactsJscrollPanel(){
-		Icon icon1 = new ImageIcon("resource/images/default_head.jpg");
-		Icon icon2 = new ImageIcon("resource/images/default_head2.jpg");
-		Icon icon3 = new ImageIcon("resource/images/default_head3.jpg");
-		Icon icon4 = new ImageIcon("resource/images/default_head2.jpg");
-		Icon icon5 = new ImageIcon("resource/images/default_head3.jpg");
+		Icon icon1 = new ImageIcon("resources/images/default_head.jpg");
+		Icon icon2 = new ImageIcon("resources/images/default_head2.jpg");
+		Icon icon3 = new ImageIcon("resources/images/default_head3.jpg");
+		Icon icon4 = new ImageIcon("resources/images/default_head2.jpg");
+		Icon icon5 = new ImageIcon("resources/images/default_head3.jpg");
 		//Icon[] icons = { icon1, icon2, icon3, icon4, icon5};
 		
 		Vector<ContactsItemData> items = new Vector<ContactsItemData>();
@@ -409,15 +409,15 @@ public class ChattingPage extends JFrame implements MouseMotionListener, MouseLi
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		if (e.getSource() == chatButton) {
-			ImageIcon icon = new ImageIcon("resource/images/chat_active.jpg");
+			ImageIcon icon = new ImageIcon("resources/images/chat_active.jpg");
 			chatButton.setIcon(icon);
-			ImageIcon icon2 = new ImageIcon("resource/images/contacts.jpg");
+			ImageIcon icon2 = new ImageIcon("resources/images/contacts.jpg");
 			contactsButton.setIcon(icon2);
 		}
 		if (e.getSource() == contactsButton) {
-			ImageIcon icon = new ImageIcon("resource/images/chat.jpg");
+			ImageIcon icon = new ImageIcon("resources/images/chat.jpg");
 			chatButton.setIcon(icon);
-			ImageIcon icon2 = new ImageIcon("resource/images/contacts_active.jpg");
+			ImageIcon icon2 = new ImageIcon("resources/images/contacts_active.jpg");
 			contactsButton.setIcon(icon2);
 		}
 		if (e.getSource() == exitButton) {

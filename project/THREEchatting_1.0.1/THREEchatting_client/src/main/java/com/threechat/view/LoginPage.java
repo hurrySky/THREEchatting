@@ -119,7 +119,7 @@ public class LoginPage extends JFrame implements MouseMotionListener, MouseListe
 		// 使用InPutStream流读取properties文件
 		BufferedReader bufferedReader = null;
 		try {
-			bufferedReader = new BufferedReader(new FileReader("resource/config/pageConfig.properties"));
+			bufferedReader = new BufferedReader(new FileReader("resources/config/pageConfig.properties"));
 		} catch (FileNotFoundException e1) {
 			System.out.println("配置文件未找到!");
 			e1.printStackTrace();
@@ -147,7 +147,7 @@ public class LoginPage extends JFrame implements MouseMotionListener, MouseListe
 		minButton = ButtonUtil.getMinButton(Color.black, Color.white);
 		minButton.addMouseListener(this);
 		
-		topImage = Toolkit.getDefaultToolkit().getImage("resource/images/top.gif");
+		topImage = Toolkit.getDefaultToolkit().getImage("resources/images/top.gif");
 		topPanel = new ImagePanal(topImage, width, height);
 		topPanel.setLayout(null);
 		

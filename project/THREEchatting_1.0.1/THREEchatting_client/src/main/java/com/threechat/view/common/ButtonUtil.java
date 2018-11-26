@@ -28,7 +28,7 @@ public class ButtonUtil extends JButton{
 	public static JButton getImageButton(String imageUrl, int button_width, int button_height) {
 		Icon icon;
 		if (imageUrl == null || "".equals(imageUrl)) {
-			icon = new ImageIcon("resource/images/default_head.jpg");
+			icon = new ImageIcon("resources/images/default_head.jpg");
 		}else {
 			icon = new ImageIcon(imageUrl);
 		}

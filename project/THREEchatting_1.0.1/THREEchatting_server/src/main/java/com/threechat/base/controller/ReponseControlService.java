@@ -7,9 +7,20 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.HashMap;
 
-import com.threechat.base.config.BaseConfig;
+import javax.annotation.Resource;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.threechat.base.config.BaseConfig;
+import com.threechat.base.entity.User;
+import com.threechat.base.mapper.UserMapper;
+
+@Service("reponseControlService")
 public class ReponseControlService implements Runnable{
+	
+	@Autowired
+	private UserMapper userMapper;
 	/**
 	 * 绑定到特定端口的服务器套接字
 	 */
@@ -89,12 +100,12 @@ public class ReponseControlService implements Runnable{
 	public void doRequestMap(HashMap<String, Object> map) {
 		System.out.println(map.get("operation"));
 		String enum_ = map.get("operation").toString();
-		@SuppressWarnings("unchecked")
 		HashMap<String, Object> param =  (HashMap<String, Object>) map.get("param");
 		if ("login".equals(enum_) && enum_ != null) {
 			String userName = (String) param.get("userName");
 			String password = (String) param.get("password");
-			
+			User user = userMapper.findUser("admin");
+			System.out.println(user);
 		}else if (true) {
 			
 		}

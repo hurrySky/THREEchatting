@@ -1,7 +1,12 @@
 package com.threechat;
 
+import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
+
+import com.threechat.base.controller.ReponseControlService;
 
 /**
  * springboot启动入口
@@ -9,7 +14,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  *
  */
 @SpringBootApplication
-public class ThreeChatApplication {
+@MapperScan("com.threechat.base.mapper")
+//@ComponentScan(basePackages = {"com.threechat.base"})
+public class ThreeChatApplication implements CommandLineRunner {
 
 	public static void main(String[] args) {
 		 SpringApplication.run(ThreeChatApplication.class, args);
@@ -20,5 +27,11 @@ public class ThreeChatApplication {
 						 "        |    |   |   Y  \\  | \\/\\  ___/\\  ___/  \\     \\___|   Y  \\/ __ \\|  |  |  | |  |   |  \\/ /_/  >            \n" +
 						 "        |____|   |___|  /__|    \\___  >\\___  >  \\______  /___|  (____  /__|  |__| |__|___|  /\\___  /                  \n" +
 						 "                      \\/            \\/     \\/          \\/     \\/     \\/                   \\//_____/                ");
+	}
+
+	@Override
+	public void run(String... arg0) throws Exception {
+		
+		 ReponseControlService.serverStart(); // 服務啟動
 	}
 }
