@@ -16,7 +16,7 @@ public class User {
     /** 用户名 */
     private String userName;
     /** 昵称 */
-    private String nickname;
+    private String nickName;
     /** 用户邮箱 */
     private String email;
     /** 手机号码 */
@@ -103,12 +103,6 @@ public class User {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-	public String getNickname() {
-		return nickname;
-	}
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
-	}
 	public String getEmail() {
 		return email;
 	}
@@ -175,11 +169,17 @@ public class User {
 	public void setAddress(String address) {
 		this.address = address;
 	}
+	public String getNickName() {
+		return nickName;
+	}
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
+	}
 	@Override
 	public String toString() {
 		return "User [userId=" + userId + ", code=" + code + ", loginName="
-				+ loginName + ", userName=" + userName + ", nickname="
-				+ nickname + ", email=" + email + ", phonenumber="
+				+ loginName + ", userName=" + userName + ", nickName="
+				+ nickName + ", email=" + email + ", phonenumber="
 				+ phonenumber + ", sex=" + sex + ", headImgUrl=" + headImgUrl
 				+ ", password=" + password + ", salt=" + salt + ", status="
 				+ status + ", loginIp=" + loginIp + ", loginDate=" + loginDate

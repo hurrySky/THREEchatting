@@ -9,7 +9,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="code"    		column="code"   	  />
 		<result property="loginName"    column="login_name"   />
 		<result property="userName"     column="user_name"    />
-		<result property="nickname"     column="nick_name"    />
+		<result property="nickName"     column="nick_name"    />
 		<result property="email"        column="email"        />
 		<result property="phonenumber"  column="phonenumber"  />
 		<result property="sex"  		column="sex"		  />
@@ -35,7 +35,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			u.code,
 			u.login_name,
 			u.user_name,
-	<!--  		u.nick_name, -->
+	  		u.nick_name,
 			u.email,
 			u.phonenumber,
 			u.sex,
@@ -45,8 +45,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			u.status,
 			u.login_ip,
 			u.login_date,
-	<!--		u.motto,      -->
-	<!--		u.address,    -->
+			u.motto,
+			u.address,
 			u.create_by,
 			u.create_time,
 			u.update_by,

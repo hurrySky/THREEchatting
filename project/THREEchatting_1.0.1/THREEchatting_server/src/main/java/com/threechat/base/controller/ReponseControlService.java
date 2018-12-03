@@ -14,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import com.threechat.base.common.ResultEntity;
+import com.threechat.base.common.tools.SocketUtil;
 import com.threechat.base.common.tools.StringUtil;
 import com.threechat.base.config.BaseConfig;
 import com.threechat.base.entity.User;
@@ -97,7 +99,8 @@ public class ReponseControlService implements Runnable{
 				ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);
 				
 				HashMap<String, Object> map = (HashMap<String, Object>)objectInputStream.readObject();
-				doRequestMap(map); // 处理请求
+				ResultEntity resultEntity = doRequestMap(map); // 处理请求
+				
 			} catch (IOException | ClassNotFoundException e) {
 				e.printStackTrace();
 			}
@@ -107,7 +110,9 @@ public class ReponseControlService implements Runnable{
 	/**
 	 * 处理请求，返回响应
 	 */
-	public Map<String, Object> doRequestMap(HashMap<String, Object> map) {
+	public ResultEntity doRequestMap(HashMap<String, Object> map) {
+		ResultEntity resultEntity = new ResultEntity();
+		HashMap<String, Object> retMap = new HashMap<String, Object>();
 		User user = null;
 		if (StringUtil.isNotNull(map)) {
 			String operation_enum = map.get("operation").toString();
@@ -117,17 +122,27 @@ public class ReponseControlService implements Runnable{
 				String userName = (String) param.get("userName");
 				String password = (String) param.get("password");
 				if ("".equals(userName) && userName != null && password != null && "".equals(password)) {
-					user = userMapper.findUser("admin");
+					user = userMapper.findUser("xiaoming");
+					if (StringUtil.isNotNull(user)) {
+						resultEntity.setState(200);
+						resultEntity.setMessage("成功!");
+						retMap.put("user", user);
+					}else {
+						resultEntity.setState(400);
+						resultEntity.setMessage("失败!");
+						retMap.put("user", null);
+					}
 				}
+				
 			}else if (true) {
 				
 			}
 		}
-		return null;
+		return resultEntity;
 	}
 	
 	public void printUser(){
-		User user = userMapper.findUser("admin");
+		User user = userMapper.findUser("xiaoming");
 		System.out.println(user);
 	}
 }

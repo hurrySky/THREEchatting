@@ -3,7 +3,7 @@ spring:
     type: com.alibaba.druid.pool.DruidDataSource
     driverClassName: com.mysql.jdbc.Driver
     # url: jdbc:mysql://127.0.0.1:3306/ry?useUnicode=true&characterEncoding=utf8
-    url: jdbc:mysql://127.0.0.1:3306/laxy?useUnicode=true&characterEncoding=utf8
+    url: jdbc:mysql://127.0.0.1:3306/three_chat?useUnicode=true&characterEncoding=utf8
     username: root
     password: root
     # 最大建立连接等待时间。如果超过此时间将接到异常。设为-1表示无限制。
