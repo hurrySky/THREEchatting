@@ -1,12 +1,20 @@
 package com.threechat;
 
+
 import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.ComponentScan;
+
+
+
+
+
+import org.springframework.stereotype.Service;
 
 import com.threechat.base.controller.ReponseControlService;
+import com.threechat.base.mapper.UserMapper;
 
 /**
  * springboot启动入口
@@ -18,6 +26,11 @@ import com.threechat.base.controller.ReponseControlService;
 //@ComponentScan(basePackages = {"com.threechat.base"})
 public class ThreeChatApplication implements CommandLineRunner {
 
+	@Autowired
+	private UserMapper userMapper;
+	@Autowired
+	private ReponseControlService reponseControlService;
+	
 	public static void main(String[] args) {
 		 SpringApplication.run(ThreeChatApplication.class, args);
 		 System.out.println(
@@ -32,6 +45,9 @@ public class ThreeChatApplication implements CommandLineRunner {
 	@Override
 	public void run(String... arg0) throws Exception {
 		
-		 ReponseControlService.serverStart(); // 服務啟動
+		reponseControlService.serverStart(); // 服務啟動
+		 System.out.println(this.userMapper.findUser("admin"));
+		 System.out.println("===============");
+		 reponseControlService.printUser();
 	}
 }

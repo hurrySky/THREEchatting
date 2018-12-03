@@ -6,21 +6,25 @@ import java.io.ObjectInputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import com.threechat.base.common.tools.StringUtil;
 import com.threechat.base.config.BaseConfig;
 import com.threechat.base.entity.User;
 import com.threechat.base.mapper.UserMapper;
-
-@Service("reponseControlService")
+//("reponseControlService")
+@Component
 public class ReponseControlService implements Runnable{
 	
 	@Autowired
 	private UserMapper userMapper;
+	
 	/**
 	 * 绑定到特定端口的服务器套接字
 	 */
@@ -34,21 +38,15 @@ public class ReponseControlService implements Runnable{
 	 */
 	private static Integer port;
 
+	public ReponseControlService() {
+		
+	}
+	public ReponseControlService(UserMapper userMapper){
+		this.userMapper = userMapper;
+	}
 	public static void main(String[] args) {
-		serverStart(); // 启动服务
+		//serverStart(); // 启动服务
 	}
-
-	/**
-	 * 服务器启动类
-	 */
-	public static void serverStart() {
-		ReponseControlService reponseControlService = new ReponseControlService();
-		Thread server = new Thread(reponseControlService);
-		server.setName("ThreeChat Control Server");
-		System.out.println("操作控制服务名称:" +server.getName());
-		server.start();
-	}
-	
 	/**
 	 * 初始化 端口
 	 */
@@ -64,8 +62,20 @@ public class ReponseControlService implements Runnable{
 			System.out.println("操作控制服务端口名称:" +port);
 		}
 	}
+	/**
+	 * 服务器启动类
+	 */
+	public void serverStart() {
+		ReponseControlService reponseControlService = new ReponseControlService(userMapper);
+		Thread server = new Thread(reponseControlService);
+		server.setName("ThreeChat Control Server");
+		System.out.println("操作控制服务名称:" +server.getName());
+		server.start();
+	}
+	
 	@Override
 	public void run() {
+		
 		System.out.println("操作控制服务线程启动中...");
 		// 监听指定的端口
 		try {
@@ -97,17 +107,27 @@ public class ReponseControlService implements Runnable{
 	/**
 	 * 处理请求，返回响应
 	 */
-	public void doRequestMap(HashMap<String, Object> map) {
-		System.out.println(map.get("operation"));
-		String enum_ = map.get("operation").toString();
-		HashMap<String, Object> param =  (HashMap<String, Object>) map.get("param");
-		if ("login".equals(enum_) && enum_ != null) {
-			String userName = (String) param.get("userName");
-			String password = (String) param.get("password");
-			User user = userMapper.findUser("admin");
-			System.out.println(user);
-		}else if (true) {
-			
+	public Map<String, Object> doRequestMap(HashMap<String, Object> map) {
+		User user = null;
+		if (StringUtil.isNotNull(map)) {
+			String operation_enum = map.get("operation").toString();
+			HashMap<String, Object> param =  (HashMap<String, Object>) map.get("param");
+			if ("login".equals(operation_enum) && operation_enum != null) {
+				
+				String userName = (String) param.get("userName");
+				String password = (String) param.get("password");
+				if ("".equals(userName) && userName != null && password != null && "".equals(password)) {
+					user = userMapper.findUser("admin");
+				}
+			}else if (true) {
+				
+			}
 		}
+		return null;
+	}
+	
+	public void printUser(){
+		User user = userMapper.findUser("admin");
+		System.out.println(user);
 	}
 }

@@ -175,4 +175,17 @@ public class User {
 	public void setAddress(String address) {
 		this.address = address;
 	}
+	@Override
+	public String toString() {
+		return "User [userId=" + userId + ", code=" + code + ", loginName="
+				+ loginName + ", userName=" + userName + ", nickname="
+				+ nickname + ", email=" + email + ", phonenumber="
+				+ phonenumber + ", sex=" + sex + ", headImgUrl=" + headImgUrl
+				+ ", password=" + password + ", salt=" + salt + ", status="
+				+ status + ", loginIp=" + loginIp + ", loginDate=" + loginDate
+				+ ", motto=" + motto + ", address=" + address + ", createBy="
+				+ createBy + ", createTime=" + createTime + ", updateBy="
+				+ updateBy + ", updateTime=" + updateTime + ", remark="
+				+ remark + "]";
+	}
 }

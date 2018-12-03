@@ -21,7 +21,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="loginDate"    column="login_date"   />
 		<result property="motto"    	column="motto"   	  />
 		<result property="address"    	column="address"      />
-		<result property="motto"    	column="motto"   />
+		<result property="motto"    	column="motto"        />
 		<result property="createBy"     column="create_by"    />
 		<result property="createTime"   column="create_time"  />
 		<result property="updateBy"     column="update_by"    />
@@ -30,12 +30,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 	<!-- 根据loginName查找用户 -->
 	<select id="findUser" parameterType="String" resultMap="UserResult">
-		select  
+		select
 			u.user_id,
 			u.code,
 			u.login_name,
 			u.user_name,
-			u.nickname,
+	<!--  		u.nick_name, -->
 			u.email,
 			u.phonenumber,
 			u.sex,
@@ -45,8 +45,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			u.status,
 			u.login_ip,
 			u.login_date,
-			u.motto,
-			u.address,
+	<!--		u.motto,      -->
+	<!--		u.address,    -->
 			u.create_by,
 			u.create_time,
 			u.update_by,
@@ -56,5 +56,5 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			sys_user u
 		where
 			u.login_name = #{loginName}
-	</select>	
+	</select>
 </mapper>

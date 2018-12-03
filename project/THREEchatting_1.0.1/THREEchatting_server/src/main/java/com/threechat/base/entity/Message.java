@@ -18,7 +18,6 @@ public class Message implements Serializable{
 	private String Message;
 	/**
 	 * 登录名/账号
-	 * @return
 	 */
 	private String loginName;
 	
