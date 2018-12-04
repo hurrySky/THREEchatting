@@ -38,7 +38,7 @@ public class LoginPage extends JFrame implements MouseMotionListener, MouseListe
 	 */
 	private int init_x;
 	/**
-	 *  初始垂直位置
+	 * 初始垂直位置
 	 */
 	private int int_y;
 	/**
@@ -217,8 +217,8 @@ public class LoginPage extends JFrame implements MouseMotionListener, MouseListe
 		if (e.getSource() == loginInButton) {
 			String userName = loginNameText.getText();
 			String pasword =  passwordText.getText();
-			String userNameReg = "^[A-Za-z0-9]{3,20}+$";
-			String passwordReg = "^[A-Za-z0-9]{3,20}+$";
+			String userNameReg = "^[A-Za-z0-9]{5,20}+$";
+			String passwordReg = "^[A-Za-z0-9]{5,20}+$";
 			if(!userName.matches(userNameReg)) {
 				LoginController.login(userName, pasword);
 				System.out.println("用户名错误!");

@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,7 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-import com.threechat.base.common.ResultEntity;
+import com.threechat.base.common.returnentity.ResultEntity;
 import com.threechat.base.common.tools.SocketUtil;
 import com.threechat.base.common.tools.StringUtil;
 import com.threechat.base.config.BaseConfig;
@@ -100,7 +101,7 @@ public class ReponseControlService implements Runnable{
 				
 				HashMap<String, Object> map = (HashMap<String, Object>)objectInputStream.readObject();
 				ResultEntity resultEntity = doRequestMap(map); // 处理请求
-				
+				SocketUtil.SendResponse(resultEntity, socket);
 			} catch (IOException | ClassNotFoundException e) {
 				e.printStackTrace();
 			}
@@ -116,21 +117,23 @@ public class ReponseControlService implements Runnable{
 		User user = null;
 		if (StringUtil.isNotNull(map)) {
 			String operation_enum = map.get("operation").toString();
-			HashMap<String, Object> param =  (HashMap<String, Object>) map.get("param");
+			HashMap<String, Object> param =  (HashMap<String, Object>)map.get("param");
 			if ("login".equals(operation_enum) && operation_enum != null) {
 				
 				String userName = (String) param.get("userName");
 				String password = (String) param.get("password");
-				if ("".equals(userName) && userName != null && password != null && "".equals(password)) {
-					user = userMapper.findUser("xiaoming");
+				if (!"".equals(userName) && userName != null && password != null && !"".equals(password)) {
+					user = userMapper.findUser(userName);
 					if (StringUtil.isNotNull(user)) {
 						resultEntity.setState(200);
 						resultEntity.setMessage("成功!");
 						retMap.put("user", user);
+						resultEntity.setRetResMap(retMap);
 					}else {
 						resultEntity.setState(400);
 						resultEntity.setMessage("失败!");
 						retMap.put("user", null);
+						resultEntity.setRetResMap(null);
 					}
 				}
 				
@@ -140,7 +143,10 @@ public class ReponseControlService implements Runnable{
 		}
 		return resultEntity;
 	}
-	
+	/**
+	 * 测试用
+	 * 打印小明对应的用户对象
+	 */
 	public void printUser(){
 		User user = userMapper.findUser("xiaoming");
 		System.out.println(user);

@@ -1,5 +1,6 @@
-package com.threechat.base.common;
+package com.threechat.base.common.returnentity;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
 /**
@@ -7,7 +8,11 @@ import java.util.HashMap;
  * @author lixin
  *
  */
-public class ResultEntity {
+public class ResultEntity implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	/**
 	 * 状态码
 	 */

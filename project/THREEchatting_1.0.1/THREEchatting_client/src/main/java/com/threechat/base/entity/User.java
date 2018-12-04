@@ -9,6 +9,10 @@ import java.io.Serializable;
  */
 public class User implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	/** 用户ID */
     private Integer userId;
     /** 用户号 */
@@ -18,7 +22,7 @@ public class User implements Serializable{
     /** 用户名 */
     private String userName;
     /** 昵称 */
-    private String nickname;
+    private String nickName;
     /** 用户邮箱 */
     private String email;
     /** 手机号码 */
@@ -105,11 +109,11 @@ public class User implements Serializable{
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-	public String getNickname() {
-		return nickname;
+	public String getNickName() {
+		return nickName;
 	}
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
 	}
 	public String getEmail() {
 		return email;

@@ -4,7 +4,12 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.ObjectOutputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.Socket;
+import java.util.HashMap;
+
+import com.threechat.base.common.returnentity.ResultEntity;
 
 /**
  * socket 收发消息时用到的工具类
@@ -53,5 +58,19 @@ public class SocketUtil {
 	   }catch(Exception se){
 	    return true;
 	   }
+	}
+	/**
+	 * 发送map对象消息
+	 * @param message
+	 * @param length
+	 * @param socket
+	 * @throws UnsupportedEncodingException
+	 * @throws IOException
+	 */
+	public static void SendResponse(ResultEntity resultEntity, Socket socket) throws UnsupportedEncodingException, IOException {
+
+		ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
+		objectOutputStream.writeObject(resultEntity);
+		// objectOutputStream.close(); 对象输出流关闭则socket也会关闭
 	}
 }

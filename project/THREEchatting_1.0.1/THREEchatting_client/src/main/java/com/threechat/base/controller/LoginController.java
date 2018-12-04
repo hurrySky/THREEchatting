@@ -5,6 +5,7 @@ import java.net.UnknownHostException;
 import java.util.HashMap;
 
 import com.threechat.base.common.operationenum.OperationEnum;
+import com.threechat.base.common.returnentity.ResultEntity;
 import com.threechat.base.services.RequestControlService;
 import com.threechat.view.ChattingPage;
 
@@ -21,13 +22,14 @@ public class LoginController {
 	/**
 	 * 登录
 	 */
-	public static void login(String userName, String pasword) {
+	public static void login(String userName, String password) {
 		HashMap<String, Object> paramMap = new HashMap<String, Object>();
+		ResultEntity resultEntity = new ResultEntity();
 		paramMap.put("userName", userName);
-		paramMap.put("pasword", userName);
+		paramMap.put("password", password);
 		HashMap<String, Object> resultMap = new HashMap<String, Object>();
 		try {
-			resultMap = requestControlService.SendRequest(OperationEnum.login.toString(), paramMap);
+			resultEntity = requestControlService.SendRequest(OperationEnum.login.toString(), paramMap);
 		} catch (UnknownHostException e) {
 			System.out.println("未知的主机");
 			e.printStackTrace();
@@ -36,6 +38,8 @@ public class LoginController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		System.out.println(resultEntity);
+		System.out.println("333");
 	}
 	
 	/**

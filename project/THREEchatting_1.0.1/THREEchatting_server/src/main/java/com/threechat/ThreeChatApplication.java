@@ -46,8 +46,7 @@ public class ThreeChatApplication implements CommandLineRunner {
 	public void run(String... arg0) throws Exception {
 		
 		reponseControlService.serverStart(); // 服務啟動
-		 System.out.println(this.userMapper.findUser("admin"));
-		 System.out.println("===============");
-		 reponseControlService.printUser();
+		//System.out.println(this.userMapper.findUser("xiaoming"));
+		//reponseControlService.printUser();
 	}
 }

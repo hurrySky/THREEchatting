@@ -9,8 +9,14 @@ import java.net.UnknownHostException;
 import java.util.HashMap;
 
 import com.threechat.base.common.operationenum.OperationEnum;
+import com.threechat.base.common.returnentity.ResultEntity;
 import com.threechat.base.common.tools.SocketUtil;
 
+/**
+ * 请求控制服务实现类
+ * @author lixin
+ *
+ */
 public class RequestControlService {
 	/**
 	 * 全局输入流
@@ -33,7 +39,7 @@ public class RequestControlService {
 	 * @throws UnknownHostException 
 	 * @throws ClassNotFoundException 
 	 */
-	public static HashMap<String, Object> SendRequest(String enum_, HashMap<String, Object> param) throws UnknownHostException, IOException, ClassNotFoundException {
+	public static ResultEntity SendRequest(String enum_, HashMap<String, Object> param) throws UnknownHostException, IOException, ClassNotFoundException {
 		 // 要连接的服务端IP地址和端口
 	    String host = "127.0.0.1";
 	    int port = 30705;
@@ -44,8 +50,8 @@ public class RequestControlService {
 	    
 	    inputStream = socket.getInputStream();
 	    objectInputStream = new ObjectInputStream(inputStream);
-	    HashMap<String, Object> map = (HashMap<String, Object>)objectInputStream.readObject();
+	    ResultEntity resultEntity = (ResultEntity) objectInputStream.readObject();
 	    socket.close();
-		return map;
+		return resultEntity;
 	}
 }
