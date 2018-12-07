@@ -21,13 +21,15 @@ import com.threechat.base.common.tools.StringUtil;
 import com.threechat.base.config.BaseConfig;
 import com.threechat.base.entity.User;
 import com.threechat.base.mapper.UserMapper;
+import com.threechat.base.services.login.LoginService;
 //("reponseControlService")
 @Component
 public class ReponseControlService implements Runnable{
 	
 	@Autowired
 	private UserMapper userMapper;
-	
+	@Autowired
+	private LoginService loginService;
 	/**
 	 * 绑定到特定端口的服务器套接字
 	 */
@@ -44,8 +46,8 @@ public class ReponseControlService implements Runnable{
 	public ReponseControlService() {
 		
 	}
-	public ReponseControlService(UserMapper userMapper){
-		this.userMapper = userMapper;
+	public ReponseControlService(LoginService loginService){
+		this.loginService = loginService;
 	}
 	public static void main(String[] args) {
 		//serverStart(); // 启动服务
@@ -69,7 +71,7 @@ public class ReponseControlService implements Runnable{
 	 * 服务器启动类
 	 */
 	public void serverStart() {
-		ReponseControlService reponseControlService = new ReponseControlService(userMapper);
+		ReponseControlService reponseControlService = new ReponseControlService(loginService);
 		Thread server = new Thread(reponseControlService);
 		server.setName("ThreeChat Control Server");
 		System.out.println("操作控制服务名称:" +server.getName());
@@ -118,24 +120,11 @@ public class ReponseControlService implements Runnable{
 		if (StringUtil.isNotNull(map)) {
 			String operation_enum = map.get("operation").toString();
 			HashMap<String, Object> param =  (HashMap<String, Object>)map.get("param");
+			// 登录操作
 			if ("login".equals(operation_enum) && operation_enum != null) {
-				
 				String userName = (String) param.get("userName");
 				String password = (String) param.get("password");
-				if (!"".equals(userName) && userName != null && password != null && !"".equals(password)) {
-					user = userMapper.findUser(userName);
-					if (StringUtil.isNotNull(user)) {
-						resultEntity.setState(200);
-						resultEntity.setMessage("成功!");
-						retMap.put("user", user);
-						resultEntity.setRetResMap(retMap);
-					}else {
-						resultEntity.setState(400);
-						resultEntity.setMessage("失败!");
-						retMap.put("user", null);
-						resultEntity.setRetResMap(null);
-					}
-				}
+				resultEntity = loginService.checkUser(userName, password);
 				
 			}else if (true) {
 				

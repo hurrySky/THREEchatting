@@ -22,6 +22,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import com.threechat.base.common.returnentity.ResultEntity;
 import com.threechat.base.controller.LoginController;
 import com.threechat.view.common.ButtonUtil;
 import com.threechat.view.common.ImagePanal;
@@ -226,9 +227,15 @@ public class LoginPage extends JFrame implements MouseMotionListener, MouseListe
 			} else if(!pasword.matches(passwordReg)) {
 				System.out.println("密码错误!");
 			} else {
-				LoginController.login(userName, pasword); // 登录
-				System.out.println("login...");
-				LoginController.toChattingPage();
+				ResultEntity resultEntity =LoginController.login(userName, pasword); // 登录
+				if (resultEntity.getState() == 200) {
+					System.out.println("login...");
+					LoginController.toChattingPage();
+					this.dispose();
+				}else {
+					System.out.println("登录失败！" + resultEntity.getMessage());
+					return;
+				}
 			}
 		}
 	}

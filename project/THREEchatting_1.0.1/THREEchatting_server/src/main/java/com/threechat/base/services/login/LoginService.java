@@ -1,10 +1,12 @@
 package com.threechat.base.services.login;
 
-public interface LoginService {
+import com.threechat.base.common.returnentity.ResultEntity;
 
+public interface LoginService {
+	
 	/**
 	 * 用户校验
 	 * 
 	 */
-	public void checkUser(String userName, String password);
+	public ResultEntity checkUser(String userName, String password);
 }
