@@ -8,7 +8,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
- * 提供对话服务
+ * 提供客户端连接及对话服务
  * @author lixin
  * 
  * IP地址+TCP或UDP端口号”就为socket

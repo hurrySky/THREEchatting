@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import com.threechat.base.controller.ReponseControlService;
 import com.threechat.base.mapper.UserMapper;
+import com.threechat.base.server.MySocketServer;
 
 /**
  * springboot启动入口
@@ -30,22 +31,24 @@ public class ThreeChatApplication implements CommandLineRunner {
 	private UserMapper userMapper;
 	@Autowired
 	private ReponseControlService reponseControlService;
+	@Autowired
+	MySocketServer mySocketServer;
 	
 	public static void main(String[] args) {
 		 SpringApplication.run(ThreeChatApplication.class, args);
-		 System.out.println(
-				 		 "      ___________.__                           _________ .__            __    __  .__                          			\n" +
-						 "      \\__    ___/|  |_________   ____   ____   \\_   ___ \\|  |__ _____ _/  |__/  |_|__| ____    ____            		\n" +
-						 "        |    |   |  |  \\_  __ \\_/ __ \\_/ __ \\  /    \\  \\/|  |  \\\\__  \\\\   __\\   __\\  |/    \\  / ___\\        \n" +
-						 "        |    |   |   Y  \\  | \\/\\  ___/\\  ___/  \\     \\___|   Y  \\/ __ \\|  |  |  | |  |   |  \\/ /_/  >            \n" +
-						 "        |____|   |___|  /__|    \\___  >\\___  >  \\______  /___|  (____  /__|  |__| |__|___|  /\\___  /                  \n" +
-						 "                      \\/            \\/     \\/          \\/     \\/     \\/                   \\//_____/                ");
+//		 System.out.println(
+//				 		 "      ___________.__                           _________ .__            __    __  .__                          			\n" +
+//						 "      \\__    ___/|  |_________   ____   ____   \\_   ___ \\|  |__ _____ _/  |__/  |_|__| ____    ____            		\n" +
+//						 "        |    |   |  |  \\_  __ \\_/ __ \\_/ __ \\  /    \\  \\/|  |  \\\\__  \\\\   __\\   __\\  |/    \\  / ___\\        \n" +
+//						 "        |    |   |   Y  \\  | \\/\\  ___/\\  ___/  \\     \\___|   Y  \\/ __ \\|  |  |  | |  |   |  \\/ /_/  >            \n" +
+//						 "        |____|   |___|  /__|    \\___  >\\___  >  \\______  /___|  (____  /__|  |__| |__|___|  /\\___  /                  \n" +
+//						 "                      \\/            \\/     \\/          \\/     \\/     \\/                   \\//_____/                ");
 	}
 
 	@Override
 	public void run(String... arg0) throws Exception {
-		
-		reponseControlService.serverStart(); // 服務啟動
+		reponseControlService.serverStart(); // 请求响应控制服務啟動
+		mySocketServer.serverStart(); // 对话服務啟動
 		//System.out.println(this.userMapper.findUser("xiaoming"));
 		//reponseControlService.printUser();
 	}

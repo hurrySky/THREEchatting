@@ -15,10 +15,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import com.threechat.base.common.config.BaseConfig;
 import com.threechat.base.common.returnentity.ResultEntity;
 import com.threechat.base.common.tools.SocketUtil;
 import com.threechat.base.common.tools.StringUtil;
-import com.threechat.base.config.BaseConfig;
 import com.threechat.base.entity.User;
 import com.threechat.base.mapper.UserMapper;
 import com.threechat.base.services.login.LoginService;
@@ -64,7 +64,7 @@ public class ReponseControlService implements Runnable{
 		if (port == null) {
 			baseConfig = BaseConfig.getSingletonInstance();
 			port = baseConfig.getConfigValueByKey("control_port", Integer.class);
-			System.out.println("操作控制服务端口名称:" +port);
+			System.out.println("请求控制服务端口名称:" +port);
 		}
 	}
 	/**
@@ -74,7 +74,7 @@ public class ReponseControlService implements Runnable{
 		ReponseControlService reponseControlService = new ReponseControlService(loginService);
 		Thread server = new Thread(reponseControlService);
 		server.setName("ThreeChat Control Server");
-		System.out.println("操作控制服务名称:" +server.getName());
+		System.out.println("请求控制服务名称:" +server.getName());
 		server.start();
 	}
 	
@@ -88,7 +88,7 @@ public class ReponseControlService implements Runnable{
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
-	    System.out.println("操作控制服务就绪，持续等待客户端连接...");
+	    System.out.println("操作控制服务就绪，等待客户端连接...");
 	    // 循环监听端口
 	    while(true){
 	    	try {
@@ -136,8 +136,8 @@ public class ReponseControlService implements Runnable{
 	 * 测试用
 	 * 打印小明对应的用户对象
 	 */
-	public void printUser(){
-		User user = userMapper.findUser("xiaoming");
-		System.out.println(user);
-	}
+//	public void printUser(){
+//		User user = userMapper.findUser("xiaoming");
+//		System.out.println(user);
+//	}
 }

@@ -12,9 +12,12 @@ import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import com.threechat.base.common.tools.SocketUtil;
-import com.threechat.base.config.BaseConfig;
+import org.springframework.stereotype.Service;
 
+import com.threechat.base.common.config.BaseConfig;
+import com.threechat.base.common.tools.SocketUtil;
+
+@Service
 public class MySocketServer implements Runnable{
 	/**
 	 * 绑定到特定端口的服务器套接字
@@ -34,18 +37,7 @@ public class MySocketServer implements Runnable{
     ExecutorService threadPool = Executors.newFixedThreadPool(100);
 	
 	public static void main(String[] args) {
-		serverStart(); // 启动服务
-	}
-	
-	/**
-	 * 服务器启动类
-	 */
-	public static void serverStart() {
-		MySocketServer mySocketServer = new MySocketServer();
-		Thread server = new Thread(mySocketServer);
-		server.setName("ThreeChat Server");
-		System.out.println("服务名称:" +server.getName());
-		server.start();
+		//serverStart(); // 启动服务
 	}
 	
 	/**
@@ -60,14 +52,23 @@ public class MySocketServer implements Runnable{
 		if (port == null) {
 			baseConfig = BaseConfig.getSingletonInstance();
 			port = baseConfig.getConfigValueByKey("port", Integer.class);
-			System.out.println("端口名称:" +port);
+			System.out.println("对话服务端口名称:" +port);
 		}
 	}
-
+	/**
+	 * 服务器启动类
+	 */
+	public void serverStart() {
+		MySocketServer mySocketServer = new MySocketServer();
+		Thread server = new Thread(mySocketServer);
+		server.setName("ThreeChat Dialogue Server");
+		System.out.println("对话服务名称:" +server.getName());
+		server.start();
+	}
+	
 	@Override
 	public void run() {
-
-	    System.out.println("服务线程启动中...");
+	    System.out.println("对话服务线程启动中...");
 		// 监听指定的端口
 		try {
 			serverSocket = new ServerSocket(port); // 监听指定的端口
@@ -75,7 +76,7 @@ public class MySocketServer implements Runnable{
 			e1.printStackTrace();
 		}
 	
-	    System.out.println("server就绪，持续等待客户端连接...");
+	    System.out.println("对话服务就绪，等待客户端连接...");
 	    // 循环监听端口
 	    while(true){
 	    	try {
@@ -83,14 +84,12 @@ public class MySocketServer implements Runnable{
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-	    	//System.out.println(".............");
 	    	Runnable runnable = new Runnable() {
 				@Override
 				public void run() {
 					
 					try {
-						
-						Socket socket =  serverSocket.accept();
+						Socket socket = serverSocket.accept();
 						InputStream inputStream = socket.getInputStream();
 						ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);
 						HashMap<String, Object> map = (HashMap<String, Object>)objectInputStream.readObject();

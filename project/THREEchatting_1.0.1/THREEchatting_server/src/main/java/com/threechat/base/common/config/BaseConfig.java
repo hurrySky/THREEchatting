@@ -1,4 +1,4 @@
-package com.threechat.base.config;
+package com.threechat.base.common.config;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
