@@ -6,8 +6,9 @@ import java.util.HashMap;
 
 import com.threechat.base.common.operationenum.OperationEnum;
 import com.threechat.base.common.returnentity.ResultEntity;
+import com.threechat.base.entity.User;
 import com.threechat.base.services.RequestControlService;
-import com.threechat.view.ChattingPage;
+import com.threechat.view.chattingpage.ChattingPageImpl;
 
 public class LoginController {
 	/**
@@ -45,7 +46,11 @@ public class LoginController {
 	/**
 	 * 跳转到chating 界面
 	 */
-	public static void toChattingPage() {
-		ChattingPage chattingPage = new ChattingPage();
+	public static void toChattingPage(HashMap<String, Object> retResMap) {
+		User user = null;
+		if (retResMap != null) {
+			user = (User) retResMap.get("user");
+		}
+		ChattingPageImpl chattingPage = new ChattingPageImpl(user);
 	}
 }

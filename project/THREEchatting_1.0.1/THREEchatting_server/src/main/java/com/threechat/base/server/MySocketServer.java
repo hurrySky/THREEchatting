@@ -32,6 +32,9 @@ public class MySocketServer implements Runnable{
 	 * 端口
 	 */
 	private static Integer port;
+	
+	// 用来存放已连接的客户端的socket会话
+    private static Map<Integer, Socket> sessionMap = new HashMap<Integer, Socket>();
     
     //如果使用多线程，那就需要线程池，防止并发过高时创建过多线程耗尽资源
     ExecutorService threadPool = Executors.newFixedThreadPool(100);
@@ -84,6 +87,7 @@ public class MySocketServer implements Runnable{
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
+	    	
 	    	Runnable runnable = new Runnable() {
 				@Override
 				public void run() {

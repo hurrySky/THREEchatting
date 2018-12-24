@@ -1,4 +1,4 @@
-package com.threechat.view;
+package com.threechat.view.chattingpage;
 
 import java.awt.Color;
 import java.awt.Container;
@@ -29,12 +29,18 @@ import javax.swing.JTextPane;
 import javax.swing.ListSelectionModel;
 
 import com.threechat.base.ContactsItemData;
+import com.threechat.base.entity.User;
 import com.threechat.view.common.ButtonUtil;
 import com.threechat.view.common.ImageButton;
 import com.threechat.view.common.MyCellRenderer;
 import com.threechat.view.common.MyScrollBarUI;
 
-public class ChattingPage extends JFrame implements MouseMotionListener, MouseListener{
+public class ChattingPageImpl extends JFrame implements IChattingPage, MouseMotionListener, MouseListener{
+	
+	/**
+	 * 用户
+	 */
+	private User user;
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -149,13 +155,15 @@ public class ChattingPage extends JFrame implements MouseMotionListener, MouseLi
 	
 	public static void main(String[] args) {
 		@SuppressWarnings("unused")
-		ChattingPage chattingPage = new ChattingPage();
+		ChattingPageImpl chattingPage = new ChattingPageImpl();
 	}
 	
 	/**
 	 * 构造方法
 	 */
-	public ChattingPage() {
+	public ChattingPageImpl(User user) {
+		this.user = user; // 给成员变量赋值
+		//================================
 		init(); // 获得配置文件信息
 		initLeftMenuPanel(); // 初始化 左边菜单
 		initTopPanel(); // 初始化顶部面板
@@ -183,6 +191,9 @@ public class ChattingPage extends JFrame implements MouseMotionListener, MouseLi
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
 	
+	public ChattingPageImpl() {
+		this(null);
+	}
 	/**
 	 * 加载读取配置信息
 	 */
@@ -213,7 +224,7 @@ public class ChattingPage extends JFrame implements MouseMotionListener, MouseLi
 	 * 初始化左菜单面板界面
 	 */
 	private void initLeftMenuPanel() {
-		headButton = new ImageButton("", 50, 50);
+		headButton = new ImageButton(user == null ? "" : user.getHeadImgUrl(), 50, 50);
 		headButton.setBounds(5, 10, 50, 50);
 		headButton.setBackground(new Color(40, 41, 43));
 		
@@ -472,5 +483,9 @@ public class ChattingPage extends JFrame implements MouseMotionListener, MouseLi
 		if (e.getSource() == sendButton) {
 			sendButton.setForeground(Color.BLACK);
 		}
+	}
+
+	@Override
+	public void startChattingPage() {
 	}
 }

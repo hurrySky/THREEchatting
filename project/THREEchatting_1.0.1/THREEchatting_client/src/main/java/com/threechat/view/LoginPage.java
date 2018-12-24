@@ -215,11 +215,11 @@ public class LoginPage extends JFrame implements MouseMotionListener, MouseListe
 		if (e.getSource() == loginNameText) {
 			loginNameText.setForeground(Color.black);
 		}
-		if (e.getSource() == loginInButton) {
-			String userName = loginNameText.getText();
-			String pasword =  passwordText.getText();
-			String userNameReg = "^[A-Za-z0-9]{5,20}+$";
-			String passwordReg = "^[A-Za-z0-9]{5,20}+$";
+		if (e.getSource() == loginInButton) { // 触发登录点击事件
+			String userName = loginNameText.getText(); // 用户名
+			String pasword =  passwordText.getText(); // 密码
+			String userNameReg = "^[A-Za-z0-9]{5,20}+$"; // 用户名正则
+			String passwordReg = "^[A-Za-z0-9]{5,20}+$"; // 密     码正则
 			if(!userName.matches(userNameReg)) {
 				LoginController.login(userName, pasword);
 				System.out.println("用户名错误!");
@@ -230,7 +230,7 @@ public class LoginPage extends JFrame implements MouseMotionListener, MouseListe
 				ResultEntity resultEntity =LoginController.login(userName, pasword); // 登录
 				if (resultEntity.getState() == 200) {
 					System.out.println("login...");
-					LoginController.toChattingPage();
+					LoginController.toChattingPage(resultEntity.getRetResMap());
 					this.dispose();
 				}else {
 					System.out.println("登录失败！" + resultEntity.getMessage());
