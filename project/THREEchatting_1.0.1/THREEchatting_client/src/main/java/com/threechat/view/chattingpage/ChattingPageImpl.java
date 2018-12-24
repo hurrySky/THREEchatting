@@ -3,8 +3,11 @@ package com.threechat.view.chattingpage;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Cursor;
+import java.awt.Dimension;
+import java.awt.Image;
 import java.awt.Point;
 import java.awt.Shape;
+import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -32,6 +35,7 @@ import com.threechat.base.ContactsItemData;
 import com.threechat.base.entity.User;
 import com.threechat.view.common.ButtonUtil;
 import com.threechat.view.common.ImageButton;
+import com.threechat.view.common.JHeadImage;
 import com.threechat.view.common.MyCellRenderer;
 import com.threechat.view.common.MyScrollBarUI;
 
@@ -152,6 +156,12 @@ public class ChattingPageImpl extends JFrame implements IChattingPage, MouseMoti
 	 *  消息发送按钮
 	 */
 	private JButton sendButton;
+	
+	/**
+	 * 
+	 * 我的 头像控件
+	 */
+	private JHeadImage myJHeadImage;
 	
 	public static void main(String[] args) {
 		@SuppressWarnings("unused")
@@ -354,6 +364,8 @@ public class ChattingPageImpl extends JFrame implements IChattingPage, MouseMoti
 		chatInfoPanel.setBorder(null);
 		chatInfoPanel.setEditable(false);
 		chatInfoPanel.setBackground(new Color(245, 245, 245));
+		chatInfoPanel.setLayout(null);
+		
 		chatInfoJscrollPanel = new JScrollPane(chatInfoPanel); // 创建聊天信息滚动条面板
 		chatInfoJscrollPanel.setBounds(0, 0, 550, 330);
 		chatInfoJscrollPanel.setBorder(null);
@@ -438,15 +450,17 @@ public class ChattingPageImpl extends JFrame implements IChattingPage, MouseMoti
 		if (e.getSource() == minButton) {
 			this.setExtendedState(JFrame.ICONIFIED); //最小化窗体
 		}
-		if (e.getSource() == sendButton) {
-			System.out.println(chatInsertPanel.getText());
-			String insertStr = chatInsertPanel.getText();
-			String kong = "";
-			for (int i = 0; i < 100 - insertStr.length(); i++) {
-				kong = "	" + kong;
-			}
-			kong = kong + insertStr;
-			chatInfoPanel.setText(kong);
+		if (e.getSource() == sendButton) { // 发送消息
+			Image headImage = Toolkit.getDefaultToolkit().getImage(user == null ? "" : user.getHeadImgUrl());
+			myJHeadImage = new  JHeadImage(null, 5, 5, 50, 50);
+			myJHeadImage.setSize(new Dimension(50,50));
+			myJHeadImage.setPreferredSize(new Dimension(50,50));
+			chatInfoPanel.insertComponent(myJHeadImage);
+			//chatInfoPanel.setCaretPosition(0);
+//			System.out.println(chatInsertPanel.getText());
+//			String insertStr = chatInsertPanel.getText();
+			
+			// chatInfoPanel.setText(kong);
 		}
 	}
 	@Override

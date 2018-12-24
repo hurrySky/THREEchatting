@@ -48,6 +48,7 @@ public class JHeadImage extends JComponent{
 		this.head_image_w = head_image_w;
 		this.head_image_h = head_image_h;
 		this.setBounds(x, y, this.head_image_w, this.head_image_h);
+		this.setVisible(true);
 	}
 	
 	public JHeadImage(String imageSrc) {
