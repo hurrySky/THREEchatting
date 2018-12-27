@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.Shape;
@@ -35,6 +37,7 @@ import com.threechat.base.ContactsItemData;
 import com.threechat.base.entity.User;
 import com.threechat.view.common.ButtonUtil;
 import com.threechat.view.common.ImageButton;
+import com.threechat.view.common.JBubbleMessage;
 import com.threechat.view.common.JHeadImage;
 import com.threechat.view.common.MyCellRenderer;
 import com.threechat.view.common.MyScrollBarUI;
@@ -162,6 +165,12 @@ public class ChattingPageImpl extends JFrame implements IChattingPage, MouseMoti
 	 * 我的 头像控件
 	 */
 	private JHeadImage myJHeadImage;
+	
+	/**
+	 * 
+	 * 气泡
+	 */
+	private JBubbleMessage myJBubble;
 	
 	public static void main(String[] args) {
 		@SuppressWarnings("unused")
@@ -364,7 +373,6 @@ public class ChattingPageImpl extends JFrame implements IChattingPage, MouseMoti
 		chatInfoPanel.setBorder(null);
 		chatInfoPanel.setEditable(false);
 		chatInfoPanel.setBackground(new Color(245, 245, 245));
-		chatInfoPanel.setLayout(null);
 		
 		chatInfoJscrollPanel = new JScrollPane(chatInfoPanel); // 创建聊天信息滚动条面板
 		chatInfoJscrollPanel.setBounds(0, 0, 550, 330);
@@ -451,16 +459,41 @@ public class ChattingPageImpl extends JFrame implements IChattingPage, MouseMoti
 			this.setExtendedState(JFrame.ICONIFIED); //最小化窗体
 		}
 		if (e.getSource() == sendButton) { // 发送消息
-			Image headImage = Toolkit.getDefaultToolkit().getImage(user == null ? "" : user.getHeadImgUrl());
-			myJHeadImage = new  JHeadImage(null, 5, 5, 50, 50);
-			myJHeadImage.setSize(new Dimension(50,50));
-			myJHeadImage.setPreferredSize(new Dimension(50,50));
-			chatInfoPanel.insertComponent(myJHeadImage);
+			Image headImage = null;
+			if (user == null) {
+				headImage = null;
+			}else {
+				headImage = Toolkit.getDefaultToolkit().getImage(user.getHeadImgUrl());
+			}
+			
+//			myJHeadImage = new  JHeadImage(null, 5, 5, 50, 50);
+//			myJHeadImage.addMouseListener(this);
+//			//myJHeadImage.setSize(50, 4500);
+//			myJHeadImage.setPreferredSize(new Dimension(50,50));
+//			chatInfoPanel.insertComponent(myJHeadImage);
+//			
+//			
+			myJBubble = new JBubbleMessage(headImage,5, 5, 200, 100, "发士大夫卡萨\n丁离开饭店烧烤了房间");
+			myJBubble.setPreferredSize(new Dimension(480,100));
+//			chatInfoPanel.insertComponent(myJBubble);
+			
+			
+			JPanel jpHeadPanel = new JPanel();
+			jpHeadPanel.setBackground(Color.red);
+			//jpHeadPanel.setSize(100, 100);
+			jpHeadPanel.add(myJBubble);
+			jpHeadPanel.setPreferredSize(new Dimension(480,100));
+			chatInfoPanel.insertComponent(jpHeadPanel);
+			
 			//chatInfoPanel.setCaretPosition(0);
 //			System.out.println(chatInsertPanel.getText());
 //			String insertStr = chatInsertPanel.getText();
 			
 			// chatInfoPanel.setText(kong);
+		}
+		
+		if (e.getSource() == myJHeadImage) {
+			System.out.println("3333333333");
 		}
 	}
 	@Override

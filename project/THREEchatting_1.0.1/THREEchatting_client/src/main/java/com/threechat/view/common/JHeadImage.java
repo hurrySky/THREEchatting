@@ -23,21 +23,6 @@ public class JHeadImage extends JComponent{
 	private JHeadImage() {
 	}
 	
-//	static {
-//		//headImage = Toolkit.getDefaultToolkit().getImage("resources/images/default_head.jpg");
-//		JHeadImage.initHeadImage("resources/images/default_head.jpg", headImage);
-//	}
-	
-//	static void initHeadImage(String imgSrc, Image headImage) {
-//		if (!"".equals(imgSrc) && imgSrc != null) {
-//			headImage = Toolkit.getDefaultToolkit().getImage(imgSrc);
-//		}else if(headImage != null){
-//			JHeadImage.headImage = headImage;
-//		}
-//		
-//	}
-	
-	
 	public JHeadImage(Image headImage,int x, int y, int head_image_w, int head_image_h) {
 		if (headImage==null) {
 			this.headImage = Toolkit.getDefaultToolkit().getImage("resources/images/default_head.jpg");
@@ -48,7 +33,6 @@ public class JHeadImage extends JComponent{
 		this.head_image_w = head_image_w;
 		this.head_image_h = head_image_h;
 		this.setBounds(x, y, this.head_image_w, this.head_image_h);
-		this.setVisible(true);
 	}
 	
 	public JHeadImage(String imageSrc) {
