@@ -9,14 +9,14 @@ import java.awt.event.MouseListener;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import com.threechat.view.common.JBubbleMessage;
+import com.threechat.view.common.JBubble;
 import com.threechat.view.common.JHeadImage;
 
 public class FrameTest extends JFrame implements MouseListener{
 
 	JPanel jPanel;
 	JHeadImage jHeadImage;
-	JBubbleMessage jbubbleComponent;
+	JBubble jbubbleComponent;
 	public static void main(String[] args) {
 		FrameTest frameTest = new FrameTest();
 	}
@@ -29,7 +29,7 @@ public class FrameTest extends JFrame implements MouseListener{
 		jHeadImage = new JHeadImage(headImage, 0, 0, 50, 50);
 		jHeadImage.addMouseListener(this);
 		
-		jbubbleComponent = new JBubbleMessage();
+		jbubbleComponent = new JBubble();
 		jbubbleComponent.setBounds(0, 200, 400, 200);
 		jbubbleComponent.setBackground(Color.green);
 		

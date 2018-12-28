@@ -37,8 +37,9 @@ import com.threechat.base.ContactsItemData;
 import com.threechat.base.entity.User;
 import com.threechat.view.common.ButtonUtil;
 import com.threechat.view.common.ImageButton;
-import com.threechat.view.common.JBubbleMessage;
+import com.threechat.view.common.JBubble;
 import com.threechat.view.common.JHeadImage;
+import com.threechat.view.common.JMessagePanel;
 import com.threechat.view.common.MyCellRenderer;
 import com.threechat.view.common.MyScrollBarUI;
 
@@ -170,7 +171,7 @@ public class ChattingPageImpl extends JFrame implements IChattingPage, MouseMoti
 	 * 
 	 * 气泡
 	 */
-	private JBubbleMessage myJBubble;
+	private JBubble myJBubble;
 	
 	public static void main(String[] args) {
 		@SuppressWarnings("unused")
@@ -372,7 +373,7 @@ public class ChattingPageImpl extends JFrame implements IChattingPage, MouseMoti
 		chatInfoPanel.setSize(550, 330);
 		chatInfoPanel.setBorder(null);
 		chatInfoPanel.setEditable(false);
-		chatInfoPanel.setBackground(new Color(245, 245, 245));
+		chatInfoPanel.setBackground(new Color(237, 234, 232)); 
 		
 		chatInfoJscrollPanel = new JScrollPane(chatInfoPanel); // 创建聊天信息滚动条面板
 		chatInfoJscrollPanel.setBounds(0, 0, 550, 330);
@@ -473,17 +474,19 @@ public class ChattingPageImpl extends JFrame implements IChattingPage, MouseMoti
 //			chatInfoPanel.insertComponent(myJHeadImage);
 //			
 //			
-			myJBubble = new JBubbleMessage(headImage,5, 5, 200, 100, "发士大夫卡萨\n丁离开饭店烧烤了房间");
-			myJBubble.setPreferredSize(new Dimension(480,100));
+//			myJBubble = new JBubbleMessage(headImage,5, 5, 200, 100, "发士大夫卡萨\n丁离开饭店烧烤了房间");
+//			myJBubble.setPreferredSize(new Dimension(480,100));
 //			chatInfoPanel.insertComponent(myJBubble);
 			
 			
-			JPanel jpHeadPanel = new JPanel();
-			jpHeadPanel.setBackground(Color.red);
-			//jpHeadPanel.setSize(100, 100);
-			jpHeadPanel.add(myJBubble);
-			jpHeadPanel.setPreferredSize(new Dimension(480,100));
-			chatInfoPanel.insertComponent(jpHeadPanel);
+//			JPanel jpHeadPanel = new JPanel();
+//			jpHeadPanel.setBackground(Color.red);
+//			//jpHeadPanel.setSize(100, 100);
+//			jpHeadPanel.add(myJBubble);
+//			jpHeadPanel.setPreferredSize(new Dimension(480,100));
+			String sendText = chatInsertPanel.getText();
+			JMessagePanel JMessagePanel = new JMessagePanel(headImage, true, sendText, chatInfoPanel.getFont());
+			chatInfoPanel.insertComponent(JMessagePanel);
 			
 			//chatInfoPanel.setCaretPosition(0);
 //			System.out.println(chatInsertPanel.getText());
