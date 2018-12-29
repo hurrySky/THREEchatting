@@ -467,23 +467,6 @@ public class ChattingPageImpl extends JFrame implements IChattingPage, MouseMoti
 				headImage = Toolkit.getDefaultToolkit().getImage(user.getHeadImgUrl());
 			}
 			
-//			myJHeadImage = new  JHeadImage(null, 5, 5, 50, 50);
-//			myJHeadImage.addMouseListener(this);
-//			//myJHeadImage.setSize(50, 4500);
-//			myJHeadImage.setPreferredSize(new Dimension(50,50));
-//			chatInfoPanel.insertComponent(myJHeadImage);
-//			
-//			
-//			myJBubble = new JBubbleMessage(headImage,5, 5, 200, 100, "发士大夫卡萨\n丁离开饭店烧烤了房间");
-//			myJBubble.setPreferredSize(new Dimension(480,100));
-//			chatInfoPanel.insertComponent(myJBubble);
-			
-			
-//			JPanel jpHeadPanel = new JPanel();
-//			jpHeadPanel.setBackground(Color.red);
-//			//jpHeadPanel.setSize(100, 100);
-//			jpHeadPanel.add(myJBubble);
-//			jpHeadPanel.setPreferredSize(new Dimension(480,100));
 			String sendText = chatInsertPanel.getText();
 			JMessagePanel JMessagePanel = new JMessagePanel(headImage, true, sendText, chatInfoPanel.getFont());
 			chatInfoPanel.insertComponent(JMessagePanel);

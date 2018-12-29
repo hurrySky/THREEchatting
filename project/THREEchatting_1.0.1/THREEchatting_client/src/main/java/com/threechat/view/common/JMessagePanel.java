@@ -25,9 +25,10 @@ public class JMessagePanel extends JPanel implements MouseListener{
 		//int height = MessageUtil.getWordHeight(font, message);
 		// height = height < 50 ? 60 : height;
 		int width = MessageUtil.getWordWidth(font, message);
+		int rowNum = MessageUtil.getWordHeight(font, message);
 		this.setLayout(null);
-		//this.setPreferredSize(new Dimension(480, 55));
-		this.setPreferredSize(new Dimension(480, 95));
+		this.setPreferredSize(new Dimension(480, 40 * rowNum + 15));
+		//this.setPreferredSize(new Dimension(480, 95));
 		
 		jHeadImage = new JHeadImage(headImage, 5, 5, 50, 50);
 		jBubble = new JBubble( 0, 0, width, 40, message);

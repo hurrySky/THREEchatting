@@ -59,6 +59,5 @@ public class JBubble extends JComponent {
     	
     	g.setColor(Color.black);
     	g.drawString(message, 10 + TRIANGLE_WIDTH, 25); // 文字横坐标要加上三角形宽度
-    	g.drawString(message, 10 + TRIANGLE_WIDTH, 65); // 文字横坐标要加上三角形宽度
     }
 }
