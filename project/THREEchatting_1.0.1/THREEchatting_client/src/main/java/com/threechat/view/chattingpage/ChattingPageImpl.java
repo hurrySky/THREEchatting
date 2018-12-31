@@ -36,6 +36,7 @@ import javax.swing.ListSelectionModel;
 import com.threechat.base.ContactsItemData;
 import com.threechat.base.entity.User;
 import com.threechat.view.common.ButtonUtil;
+import com.threechat.view.common.FontUtil;
 import com.threechat.view.common.ImageButton;
 import com.threechat.view.common.JBubble;
 import com.threechat.view.common.JHeadImage;
@@ -373,6 +374,7 @@ public class ChattingPageImpl extends JFrame implements IChattingPage, MouseMoti
 		chatInfoPanel.setSize(550, 330);
 		chatInfoPanel.setBorder(null);
 		chatInfoPanel.setEditable(false);
+		chatInfoPanel.setFont(FontUtil.getBlackMiddle()); // 设置普通黑体中等字体
 		chatInfoPanel.setBackground(new Color(237, 234, 232)); 
 		
 		chatInfoJscrollPanel = new JScrollPane(chatInfoPanel); // 创建聊天信息滚动条面板
@@ -385,6 +387,7 @@ public class ChattingPageImpl extends JFrame implements IChattingPage, MouseMoti
 		chatInsertPanel = new JTextPane(); // 创建聊天输入面板对象
 		chatInsertPanel.setSize(550, 130);
 		chatInsertPanel.setBorder(null);
+		chatInsertPanel.setFont(FontUtil.getBlackMiddle()); // 设置普通黑体中等字体
 		chatInsertPanel.setBackground(Color.WHITE);
 		
 		chatInsertJscrollPanel = new JScrollPane(chatInsertPanel); // 创建聊天输入信息滚动条面板
@@ -472,10 +475,7 @@ public class ChattingPageImpl extends JFrame implements IChattingPage, MouseMoti
 			chatInfoPanel.insertComponent(JMessagePanel);
 			
 			//chatInfoPanel.setCaretPosition(0);
-//			System.out.println(chatInsertPanel.getText());
-//			String insertStr = chatInsertPanel.getText();
-			
-			// chatInfoPanel.setText(kong);
+			//String insertStr = chatInsertPanel.getText();
 		}
 		
 		if (e.getSource() == myJHeadImage) {
