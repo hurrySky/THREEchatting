@@ -31,7 +31,8 @@ public class JBubble extends JComponent {
 	private List<String> messageList;
 	private String message;
 	private JTextPane messageTextArea;
-	private Color BUBBLE_COLOR = new Color(152, 225, 100);
+	// private Color BUBBLE_COLOR = new Color(152, 225, 100);
+	private Color BUBBLE_COLOR = Color.WHITE;
 	public JBubble() {
 	}
 	/**
