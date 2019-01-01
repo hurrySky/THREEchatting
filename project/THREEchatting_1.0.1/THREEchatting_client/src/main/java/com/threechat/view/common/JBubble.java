@@ -23,6 +23,7 @@ public class JBubble extends JComponent {
 	
 	private int x;
 	private int y;
+	private boolean isLeft;
 	private final int TRIANGLE_WIDTH = 10;
 	private final int TRIANGLE_HEIGHT = 15;
 	private int bubble_width;
@@ -31,8 +32,8 @@ public class JBubble extends JComponent {
 	private List<String> messageList;
 	private String message;
 	private JTextPane messageTextArea;
-	// private Color BUBBLE_COLOR = new Color(152, 225, 100);
-	private Color BUBBLE_COLOR = Color.WHITE;
+	private Color GREEN_COLOR = new Color(152, 225, 100);
+	private Color WHITE_COLOR = Color.WHITE;
 	public JBubble() {
 	}
 	/**
@@ -60,7 +61,7 @@ public class JBubble extends JComponent {
 	 * @param Str 文本
 	 * @param img 头像
 	 */
-	public JBubble(int x, int y, int bubble_width, int bubble_height, Font font, String message) {
+	public JBubble(int x, int y, int bubble_width, int bubble_height, Font font, String message, Boolean isLeft) {
 		
 		this.x = x;
 		this.y = y;
@@ -68,28 +69,54 @@ public class JBubble extends JComponent {
 		this.bubble_height = bubble_height;
 		this.font = font;
 		this.message = message;
-		this.setBounds(60, 10, bubble_width + TRIANGLE_WIDTH + 10, bubble_height - 10); // 下偏移 10
-		messageTextArea = new JTextPane();
-		messageTextArea.setBounds(TRIANGLE_WIDTH + 5, 0, bubble_width, bubble_height - 10); // +5 messageTextArea 向右偏移5，使父控件圆角可以显示
-		messageTextArea.setFont(font);
-		messageTextArea.setBackground(BUBBLE_COLOR);
-		messageTextArea.setText(message);
-		messageTextArea.setSize(bubble_width, bubble_height - 10);
-		messageTextArea.setEditable(false);
-		this.add(messageTextArea);
+		this.isLeft = isLeft;
+		if (isLeft) {
+			this.setBounds(x, 10, bubble_width + TRIANGLE_WIDTH + 10, bubble_height - 10); // 下偏移 10
+			messageTextArea = new JTextPane();
+			messageTextArea.setBounds(TRIANGLE_WIDTH + 5, 0, bubble_width, bubble_height - 10); // +5 messageTextArea 向右偏移5，使父控件圆角可以显示
+			messageTextArea.setFont(font);
+			messageTextArea.setBackground(WHITE_COLOR);
+			messageTextArea.setText(message);
+			messageTextArea.setSize(bubble_width, bubble_height - 10);
+			messageTextArea.setEditable(false);
+			this.add(messageTextArea);
+		} else {
+			this.setBounds(x - TRIANGLE_WIDTH - 10, 10, bubble_width + TRIANGLE_WIDTH + 10, bubble_height - 10); // 下偏移 10, 向左偏移 TRIANGLE_WIDTH + 10
+			messageTextArea = new JTextPane();
+			messageTextArea.setBounds(5, 0, bubble_width, bubble_height - 10); // +5 messageTextArea 向右偏移5，使父控件圆角可以显示
+			messageTextArea.setFont(font);
+			messageTextArea.setBackground(GREEN_COLOR);
+			messageTextArea.setText(message);
+			messageTextArea.setSize(bubble_width, bubble_height - 10);
+			messageTextArea.setEditable(false);
+			this.add(messageTextArea);
+		}
+		
 		//this.setForeground(new Color(152, 225, 100));
 	}
 	@Override
     protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		g.setColor(BUBBLE_COLOR);
-		Polygon filledPolygon=new Polygon();
-		filledPolygon.addPoint(x, 20);
-		filledPolygon.addPoint(x + TRIANGLE_WIDTH, 20 - (TRIANGLE_HEIGHT / 2));
-		filledPolygon.addPoint(x + TRIANGLE_WIDTH, 20 + (TRIANGLE_HEIGHT / 2));
-		//g.drawPolygon(filledPolygon);
-		g.fillPolygon(filledPolygon);
-		g.fillRoundRect(x + TRIANGLE_WIDTH, y, bubble_width + 10, bubble_height - 10, 10, 10);
+		
+		if (this.isLeft) {
+			g.setColor(WHITE_COLOR);
+			Polygon filledPolygon=new Polygon();
+			filledPolygon.addPoint(0, 20);
+			filledPolygon.addPoint(0 + TRIANGLE_WIDTH, 20 - (TRIANGLE_HEIGHT / 2));
+			filledPolygon.addPoint(0 + TRIANGLE_WIDTH, 20 + (TRIANGLE_HEIGHT / 2));
+			//g.drawPolygon(filledPolygon);
+			g.fillPolygon(filledPolygon);
+			g.fillRoundRect(0 + TRIANGLE_WIDTH, y, bubble_width + 10, bubble_height - 10, 10, 10);
+		} else {
+			g.setColor(GREEN_COLOR);
+			Polygon filledPolygon=new Polygon();
+			filledPolygon.addPoint(bubble_width + 10 + TRIANGLE_WIDTH, 20);
+			filledPolygon.addPoint(0 + bubble_width + 10, 20 - (TRIANGLE_HEIGHT / 2));
+			filledPolygon.addPoint(0 + bubble_width + 10, 20 + (TRIANGLE_HEIGHT / 2));
+			g.fillPolygon(filledPolygon);
+			g.fillRoundRect(0, y, bubble_width + 10, bubble_height - 10, 10, 10);
+		}
+		
     	
     	// 文字采用 JTextPane 控件呈现，所以不采用绘制文本信息。以下代码将不会执行
 		g.setColor(Color.black);

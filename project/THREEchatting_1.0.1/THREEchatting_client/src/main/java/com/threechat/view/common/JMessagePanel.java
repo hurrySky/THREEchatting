@@ -23,21 +23,25 @@ public class JMessagePanel extends JPanel implements MouseListener{
 	
 	public JMessagePanel(Image headImage, boolean isMe, String message, Font font) {
 		
-		int height = MessageUtil.getWordHeight(font, message);
 		int rowNum = MessageUtil.getRowNum(font, message);
+		int height = MessageUtil.getWordHeight(font, message);
 		height = rowNum < 2 ? 50 : (rowNum - 1) * height + 50;
 		int width = MessageUtil.getMessageWidth(font, message); // 气泡及文本宽度，根据消息参数判断
-		this.setLayout(null);
-		this.setPreferredSize(new Dimension(480, height + 5)); // + 5 增加下边距
+		if (isMe) {
+			jHeadImage = new JHeadImage(headImage, 5, 5, 50, 50);
+			//jBubble = new JBubble(0, 0, width, rowNum * 30, font, MessageUtil.getMessageLineList(font, message));
+			jBubble = new JBubble(60, 0, width + 20, height, font, message, true);
+		} else {
+			jHeadImage = new JHeadImage(headImage, 550 - 55 - 15, 5, 50, 50); // 550：聊天信息面板宽度， 55： 头像及 头像右边距，15：聊天信息面板滚动条宽度
+			jBubble = new JBubble(550 - 15 - (width + 20) - 60, 0, width + 20, height, font, message, false);
+		}
 		
-		jHeadImage = new JHeadImage(headImage, 5, 5, 50, 50);
-		//jBubble = new JBubble(0, 0, width, rowNum * 30, font, MessageUtil.getMessageLineList(font, message));
-		jBubble = new JBubble(0, 0, width + 20, height, font, message);
-		
-		this.add(jHeadImage);
-		this.add(jBubble);
 		this.isMe = isMe;
 		this.message = message;
+		this.setLayout(null);
+		this.setPreferredSize(new Dimension(480, height + 5)); // + 5 增加下边距
+		this.add(jHeadImage);
+		this.add(jBubble);
 	}
 
 	@Override

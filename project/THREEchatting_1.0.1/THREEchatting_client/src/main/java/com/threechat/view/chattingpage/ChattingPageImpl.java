@@ -471,7 +471,7 @@ public class ChattingPageImpl extends JFrame implements IChattingPage, MouseMoti
 			}
 			
 			String sendText = chatInsertPanel.getText();
-			JMessagePanel JMessagePanel = new JMessagePanel(headImage, true, sendText, chatInfoPanel.getFont());
+			JMessagePanel JMessagePanel = new JMessagePanel(headImage, false, sendText, chatInfoPanel.getFont());
 			chatInfoPanel.insertComponent(JMessagePanel);
 			
 			//chatInfoPanel.setCaretPosition(0);
