@@ -18,6 +18,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.Properties;
 import java.util.Vector;
@@ -34,6 +35,8 @@ import javax.swing.JTextPane;
 import javax.swing.ListSelectionModel;
 
 import com.threechat.base.ContactsItemData;
+import com.threechat.base.client.ChattingClient;
+import com.threechat.base.client.ChattingClientImpl;
 import com.threechat.base.entity.User;
 import com.threechat.view.common.ButtonUtil;
 import com.threechat.view.common.FontUtil;
@@ -473,6 +476,17 @@ public class ChattingPageImpl extends JFrame implements IChattingPage, MouseMoti
 			String sendText = chatInsertPanel.getText();
 			JMessagePanel JMessagePanel = new JMessagePanel(headImage, false, sendText, chatInfoPanel.getFont());
 			chatInfoPanel.insertComponent(JMessagePanel);
+			ChattingClientImpl chattingClient = new ChattingClientImpl();
+			
+			try {
+				chattingClient.doChat(sendText); // 处理消息
+			} catch (UnknownHostException e1) {
+
+				e1.printStackTrace();
+			} catch (IOException e1) {
+			
+				e1.printStackTrace();
+			}
 			
 			//chatInfoPanel.setCaretPosition(0);
 			//String insertStr = chatInsertPanel.getText();

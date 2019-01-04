@@ -27,12 +27,12 @@ import com.threechat.base.server.MySocketServer;
 //@ComponentScan(basePackages = {"com.threechat.base"})
 public class ThreeChatApplication implements CommandLineRunner {
 
-	@Autowired
-	private UserMapper userMapper;
+//	@Autowired
+//	private UserMapper userMapper;
 	@Autowired
 	private ReponseControlService reponseControlService;
 	@Autowired
-	MySocketServer mySocketServer;
+	private MySocketServer mySocketServer;
 	
 	public static void main(String[] args) {
 		 SpringApplication.run(ThreeChatApplication.class, args);

@@ -55,10 +55,10 @@ public class BaseConfig {
 	 */
 	@SuppressWarnings("unchecked")
 	public <T> T  getConfigValueByKey (String key, Class<T> c) {
-		T t = (T) new Integer(0);
-		if (t instanceof Integer) {
+		T t = null;
+		if ("java.lang.Integer".equals(c.getName())) {
 			t = (T) Integer.valueOf((String) properties.get(key));
-		}else if (t instanceof String) {
+		}else if ("java.lang.String".equals(c.getName())) {
 			t = (T) properties.get(key);
 		}
 		return t;

@@ -78,7 +78,7 @@ public class MySocketServer implements Runnable{
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
-	
+
 	    System.out.println("对话服务就绪，等待客户端连接...");
 	    // 循环监听端口
 	    while(true){
@@ -87,7 +87,7 @@ public class MySocketServer implements Runnable{
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-	    	
+	    	// 接受客户端消息线程
 	    	Runnable runnable = new Runnable() {
 				@Override
 				public void run() {

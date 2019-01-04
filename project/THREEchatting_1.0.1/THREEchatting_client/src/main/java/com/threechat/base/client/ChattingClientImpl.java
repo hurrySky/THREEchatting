@@ -10,9 +10,15 @@ import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.threechat.base.common.config.BaseConfig;
 import com.threechat.base.common.tools.SocketUtil;
 
 public class ChattingClientImpl implements ChattingClient{
+	
+	private static BaseConfig baseConfig; // 声明配置类对象
+	private static Integer port; // 声明端口
+	private static String host; // 声明主机地址
+	
 	public static void main(String args[]) throws UnknownHostException, IOException{
 		 // 要连接的服务端IP地址和端口
 	    String host = "127.0.0.1";
@@ -35,6 +41,39 @@ public class ChattingClientImpl implements ChattingClient{
 	    socket.close();
 	}
 	
+	/**
+	 * 初始化 端口
+	 */
+	static{
+		// 静态代码块在类初始化的时候执行
+		// 类运行有以下步骤
+		// 1.装载
+		// 2.连接
+		// 3.初始化
+		baseConfig = BaseConfig.getSingletonInstance();
+		if (port == null) {
+			port = baseConfig.getConfigValueByKey("port", Integer.class);
+			System.out.println("对话服务端口名称:" + port);
+		}
+		
+		if (host == null || "".equals(host)) {
+			host = baseConfig.getConfigValueByKey("host", String.class);
+			System.out.println("对话服务主机地址:" + host);
+		}
+	}
+	
+	/**
+	 * 处理 聊天任务
+	 * @throws IOException 
+	 * @throws UnknownHostException 
+	 */
+	public static void doChat(String sendText) throws UnknownHostException, IOException {
+		Socket socket = new Socket(host, port);
+	    // 建立连接后获得输出流
+	    OutputStream outputStream = socket.getOutputStream();
+	    //sendMessageMap(message, length, socket);
+		
+	}
 	/**
 	 * 发送消息
 	 * @param message
