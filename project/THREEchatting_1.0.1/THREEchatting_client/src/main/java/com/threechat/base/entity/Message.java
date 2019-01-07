@@ -23,6 +23,7 @@ public class Message implements Serializable{
 	 * 用户编号
 	 */
 	private String code;
+	
 	/**
 	 * 发送时间
 	 */

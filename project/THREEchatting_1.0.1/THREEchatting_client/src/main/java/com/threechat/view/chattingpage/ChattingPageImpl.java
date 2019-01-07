@@ -479,15 +479,16 @@ public class ChattingPageImpl extends JFrame implements IChattingPage, MouseMoti
 			ChattingClientImpl chattingClient = new ChattingClientImpl();
 			
 			try {
-				chattingClient.doChat(sendText); // 处理消息
+				chattingClient.doChat(sendText, user); // 处理消息
 			} catch (UnknownHostException e1) {
-
 				e1.printStackTrace();
 			} catch (IOException e1) {
-			
+				e1.printStackTrace();
+			} catch (ClassNotFoundException e1) {
+				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-			
+			chatInsertPanel.setText("");
 			//chatInfoPanel.setCaretPosition(0);
 			//String insertStr = chatInsertPanel.getText();
 		}

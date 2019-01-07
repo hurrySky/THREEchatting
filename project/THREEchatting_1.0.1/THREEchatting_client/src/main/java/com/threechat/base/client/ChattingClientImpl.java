@@ -2,16 +2,21 @@ package com.threechat.base.client;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 import com.threechat.base.common.config.BaseConfig;
 import com.threechat.base.common.tools.SocketUtil;
+import com.threechat.base.common.tools.TimeUtil;
+import com.threechat.base.entity.Message;
+import com.threechat.base.entity.User;
 
 public class ChattingClientImpl implements ChattingClient{
 	
@@ -19,7 +24,7 @@ public class ChattingClientImpl implements ChattingClient{
 	private static Integer port; // 声明端口
 	private static String host; // 声明主机地址
 	
-	public static void main(String args[]) throws UnknownHostException, IOException{
+	public static void main(String args[]) throws UnknownHostException, IOException, ClassNotFoundException{
 		 // 要连接的服务端IP地址和端口
 	    String host = "127.0.0.1";
 	    int port = 30704;
@@ -34,9 +39,11 @@ public class ChattingClientImpl implements ChattingClient{
 	    //sendMessage(String.valueOf(len), socket);
 	    //socket.shutdownOutput();
 	    //sendMessage(message, socket);
+	    
 	    InputStream inputStream = socket.getInputStream();
-		StringBuilder stringBuilder = getStrInfoByInputStream(inputStream);
-	    System.out.println(stringBuilder);
+	    getObjectInfoByInputStream(inputStream);
+//		StringBuilder stringBuilder = getStrInfoByInputStream(inputStream);
+//	    System.out.println(stringBuilder);
 	    outputStream.close();
 	    socket.close();
 	}
@@ -66,13 +73,16 @@ public class ChattingClientImpl implements ChattingClient{
 	 * 处理 聊天任务
 	 * @throws IOException 
 	 * @throws UnknownHostException 
+	 * @throws ClassNotFoundException 
 	 */
-	public static void doChat(String sendText) throws UnknownHostException, IOException {
+	public static void doChat(String sendText, User user) throws UnknownHostException, IOException, ClassNotFoundException {
 		Socket socket = new Socket(host, port);
-	    // 建立连接后获得输出流
-	    OutputStream outputStream = socket.getOutputStream();
-	    //sendMessageMap(message, length, socket);
-		
+		sendMessageMap(sendText, socket, user);
+		// socket.shutdownOutput(); // 通过Socket关闭输出流,缺点是不能再次向服务端发送消息
+		InputStream inputStream = socket.getInputStream();
+		Message message = getObjectInfoByInputStream(inputStream);
+//		StringBuilder stringBuilder = getStrInfoByInputStream(inputStream);
+//	    System.out.println("服务端消息" + stringBuilder);
 	}
 	/**
 	 * 发送消息
@@ -111,6 +121,24 @@ public class ChattingClientImpl implements ChattingClient{
 		objectOutputStream.writeObject(map);
 	}
 	
+	/**
+	 * 发送map对象消息
+	 * @param message 文本消息
+	 * @param socket
+	 * @throws UnsupportedEncodingException
+	 * @throws IOException
+	 */
+	public static void sendMessageMap(String _message, Socket socket, User user) throws UnsupportedEncodingException, IOException {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		Message message = new Message();
+		message.setMessage(_message);
+		message.setSendTime(TimeUtil.getYYYYMMDDTime(new Date()));
+		message.setCode(user.getCode());
+		map.put("message", message);
+		ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
+		objectOutputStream.writeObject(map);
+	}
+	
 	private static StringBuilder getStrInfoByInputStream(InputStream inputStream) {
 		StringBuilder stringBuilder = new StringBuilder();
 		try {
@@ -125,5 +153,12 @@ public class ChattingClientImpl implements ChattingClient{
 			e.printStackTrace();
 		}
 		return stringBuilder;
+	}
+	
+	private static Message getObjectInfoByInputStream(InputStream inputStream) throws IOException, ClassNotFoundException {
+		ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);
+		Message message = (Message) objectInputStream.readObject();
+		System.out.println(message);
+		return message;
 	}
 }
